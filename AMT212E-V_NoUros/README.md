@@ -37,6 +37,11 @@ The AMT212E-V is a high-precision absolute encoder with a 12-bit resolution, pro
 
 To start, download AMT212EV.h, MathOperation.h to your Inc folder and AMT212EV.c, MathOperation.c to your Src folder.
 
+- [AMT212EV.h](Core/Inc/AMT212EV.h)
+- [AMT212EV.c](Core/Src/AMT212EV.c)
+- [MathOperation.h](Core/Inc/MathOperation.h)
+- [MathOperation.c](Core/Src/MathOperation.c)<br>
+<br>
 > In the section `USER CODE BEGIN Includes` add the following line:
 
 ```
@@ -57,7 +62,7 @@ HAL_TIM_Base_Start_IT(&htim2);
 > Add this following line in `USER CODE BEGIN 4`
 ```
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	if(htim = &htim2){
+	if(htim == &htim2){
 		AMT212EV_ReadPosition(&amt);
 		AMT212EV_DiffCount(&amt);
 		AMT212EV_Compute(&amt);
