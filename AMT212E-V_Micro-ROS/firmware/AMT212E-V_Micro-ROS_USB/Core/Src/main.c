@@ -20,13 +20,14 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "dma.h"
+#include "iwdg.h"
 #include "usart.h"
 #include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "AMT212EV.h"
+//#include "AMT212EV.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-AMT212EV amt;
+//AMT212EV amt;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -96,9 +97,10 @@ int main(void)
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   MX_LPUART1_UART_Init();
+  MX_IWDG_Init();
   /* USER CODE BEGIN 2 */
-  AMT212EV_Init(&amt, &huart1, 1000, 16384);
-  HAL_TIM_Base_Start_IT(&htim2);
+//  AMT212EV_Init(&amt, &huart1, 1000, 16384);
+//  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -139,12 +141,12 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV4;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV6;
   RCC_OscInitStruct.PLL.PLLN = 85;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
@@ -170,13 +172,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	if(htim == &htim2){
-		AMT212EV_ReadPosition(&amt);
-		AMT212EV_DiffCount(&amt);
-		AMT212EV_Compute(&amt);
-	}
-}
+
 /* USER CODE END 4 */
 
 /**
@@ -190,6 +186,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
+//	if(htim == &htim2){
+//		AMT212EV_ReadPosition(&amt);
+//		AMT212EV_DiffCount(&amt);
+//		AMT212EV_Compute(&amt);
+//	}
 
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM1) {

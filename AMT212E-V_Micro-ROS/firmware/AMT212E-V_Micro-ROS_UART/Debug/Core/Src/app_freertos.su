@@ -1,0 +1,4 @@
+../Core/Src/app_freertos.c:109:6:MX_FREERTOS_Init	8	static
+../Core/Src/app_freertos.c:151:6:StartDefaultTask	456	static
+../Core/Src/app_freertos.c:232:6:timer_callback	24	static
+../Core/Src/app_freertos.c:242:6:amt_publish	32	static

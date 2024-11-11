@@ -9,6 +9,10 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/subdir.mk
 -include Drivers/STM32G4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
@@ -54,14 +58,15 @@ AMT212E-V_Micro-ROS_USB.list \
 
 
 # All Target
-all: main-build
+all:
+	+@$(MAKE) --no-print-directory pre-build && $(MAKE) --no-print-directory main-build
 
 # Main-build Target
 main-build: AMT212E-V_Micro-ROS_USB.elf secondary-outputs
 
 # Tool invocations
 AMT212E-V_Micro-ROS_USB.elf AMT212E-V_Micro-ROS_USB.map: $(OBJS) $(USER_OBJS) /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_USB/STM32G474RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_USB.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_USB/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_USB.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_USB.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_USB/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_USB.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -80,6 +85,10 @@ clean:
 	-$(RM) AMT212E-V_Micro-ROS_USB.elf AMT212E-V_Micro-ROS_USB.list AMT212E-V_Micro-ROS_USB.map default.size.stdout
 	-@echo ' '
 
+pre-build:
+	docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_USB:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+	-@echo ' '
+
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
 
 fail-specified-linker-script-missing:
@@ -89,6 +98,6 @@ fail-specified-linker-script-missing:
 warn-no-linker-script-specified:
 	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
 
-.PHONY: all clean dependents main-build fail-specified-linker-script-missing warn-no-linker-script-specified
+.PHONY: all clean dependents main-build fail-specified-linker-script-missing warn-no-linker-script-specified pre-build
 
 -include ../makefile.targets

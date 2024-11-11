@@ -1,0 +1,19 @@
+05:01:53 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 103492	    332	  45880	 149704	  248c8	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+
+05:01:56 Build Finished. 0 errors, 0 warnings. (took 3s.467ms)
+
