@@ -40,8 +40,8 @@ To start, download AMT212EV.h, MathOperation.h to your Inc folder and AMT212EV.c
 - [AMT212EV.h](Core/Inc/AMT212EV.h)
 - [AMT212EV.c](Core/Src/AMT212EV.c)
 - [MathOperation.h](Core/Inc/MathOperation.h)
-- [MathOperation.c](Core/Src/MathOperation.c)<br>
-<br>
+- [MathOperation.c](Core/Src/MathOperation.c)
+
 > In the section `USER CODE BEGIN Includes` add the following line:
 
 ```
