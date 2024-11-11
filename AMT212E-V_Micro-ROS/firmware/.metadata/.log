@@ -1,0 +1,39 @@
+!SESSION 2024-11-11 20:32:08.407 -----------------------------------------------
+eclipse.buildId=Version 1.16.1
+java.version=17.0.11
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-11-11 20:32:16.389
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-11-11 20:32:16.390
+!MESSAGE Log4j2 initialized with config file /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-11-11 20:32:19.300
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2024-11-11 20:32:29.294 -----------------------------------------------
+eclipse.buildId=Version 1.16.1
+java.version=17.0.11
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-11-11 20:32:35.010
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-11-11 20:32:35.011
+!MESSAGE Log4j2 initialized with config file /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-11-11 20:32:37.016
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-11-11 20:34:37.185
+!MESSAGE Indexed 'AMT212E-V_Micro-ROS_USB' (21 sources, 81 headers) in 3.14 sec: 4,947 declarations; 21,263 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0076%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-11-11 20:35:45.474
+!MESSAGE Indexed 'AMT212E-V_Micro-ROS_UART' (23 sources, 118 headers) in 2.21 sec: 13,849 declarations; 78,668 references; 3 unresolved inclusions; 46 syntax errors; 171 unresolved names (0.18%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-11-11 20:59:08.573
+!MESSAGE Indexed 'AMT212E-V_Micro-ROS_USB' (25 sources, 89 headers) in 0.951 sec: 7,726 declarations; 51,064 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0034%)

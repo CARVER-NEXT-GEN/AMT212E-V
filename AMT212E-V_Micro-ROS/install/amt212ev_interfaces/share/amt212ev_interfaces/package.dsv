@@ -1,0 +1,8 @@
+source;share/amt212ev_interfaces/hook/cmake_prefix_path.ps1
+source;share/amt212ev_interfaces/hook/cmake_prefix_path.dsv
+source;share/amt212ev_interfaces/hook/cmake_prefix_path.sh
+source;share/amt212ev_interfaces/local_setup.bash
+source;share/amt212ev_interfaces/local_setup.dsv
+source;share/amt212ev_interfaces/local_setup.ps1
+source;share/amt212ev_interfaces/local_setup.sh
+source;share/amt212ev_interfaces/local_setup.zsh

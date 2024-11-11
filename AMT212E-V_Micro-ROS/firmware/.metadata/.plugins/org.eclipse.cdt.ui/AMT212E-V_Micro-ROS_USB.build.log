@@ -1,0 +1,10 @@
+20:40:30 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_USB ****
+make -j16 all 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_USB.elf 
+   text	   data	    bss	    dec	    hex	filename
+  26520	     12	   2132	  28664	   6ff8	AMT212E-V_Micro-ROS_USB.elf
+Finished building: default.size.stdout
+ 
+
+20:40:30 Build Finished. 0 errors, 0 warnings. (took 191ms)
+
