@@ -1,0 +1,3 @@
+[submodule "AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils"]
+	path = AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils
+	url = https://github.com/CARVER-NEXT-GEN/micro_ros_stm32cubemx_utils.git
