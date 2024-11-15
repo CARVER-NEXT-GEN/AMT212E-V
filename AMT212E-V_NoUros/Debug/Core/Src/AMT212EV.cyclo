@@ -1,5 +1,4 @@
 ../Core/Src/AMT212EV.c:17:6:AMT212EV_Init	1
-../Core/Src/AMT212EV.c:49:6:AMT212EV_Flip	1
 ../Core/Src/AMT212EV.c:53:6:AMT212EV_ReadPosition	2
 ../Core/Src/AMT212EV.c:68:6:AMT212EV_SetZero	2
 ../Core/Src/AMT212EV.c:80:10:AMT212EV_Processing_Data	4

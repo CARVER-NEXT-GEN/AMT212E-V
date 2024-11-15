@@ -28,6 +28,7 @@
 #include "dma.h"
 #include "iwdg.h"
 #include "usart.h"
+#include "tim.h"
 #include "gpio.h"
 
 #include <rcl/rcl.h>
@@ -37,6 +38,8 @@
 #include <uxr/client/transport.h>
 #include <rmw_microxrcedds_c/config.h>
 #include <rmw_microros/rmw_microros.h>
+
+#include "AMT212EV.h"
 
 #include <amt212ev_interfaces/msg/amt_read.h>
 /* USER CODE END Includes */
@@ -49,7 +52,7 @@ typedef StaticTask_t osStaticThreadDef_t;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define ALPHA 0.1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -59,6 +62,8 @@ typedef StaticTask_t osStaticThreadDef_t;
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+AMT212EV amt;
+
 rcl_node_t node;
 
 rcl_publisher_t amt_publisher;
@@ -66,6 +71,7 @@ amt212ev_interfaces__msg__AmtRead amt_msg;
 
 rcl_subscription_t amt_subscription;
 
+float filtered_value = 0.0;
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -95,6 +101,8 @@ void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element,
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time);
 
 void amt_publish(double rads, double radps);
+
+float update_filter(float input);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -108,7 +116,8 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-
+	AMT212EV_Init(&amt, &huart1, 1000, 16384);
+	HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -204,7 +213,7 @@ void StartDefaultTask(void *argument)
   rclc_node_init_default(&node, "uros_AMT_Node", "", &support);
 
   // create publisher
-  rclc_publisher_init_default(&amt_publisher, &node, amt_type_support, "amt_publisher");
+  rclc_publisher_init_best_effort(&amt_publisher, &node, amt_type_support, "amt_publisher");
 
   // create subscriber
 
@@ -231,10 +240,9 @@ void StartDefaultTask(void *argument)
 /* USER CODE BEGIN Application */
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 {
-
 	if (timer != NULL)
 	{
-		amt_publish(1.0,1.0);
+		amt_publish(amt.rads,amt.radps);
 		HAL_IWDG_Refresh(&hiwdg);
 	}
 }
@@ -245,6 +253,28 @@ void amt_publish(double rads, double radps)
 	amt_msg.radps = radps;
 	rcl_ret_t ret = rcl_publish(&amt_publisher, &amt_msg, NULL);
 	if (ret != RCL_RET_OK) printf("Error publishing (line %d)\n", __LINE__);
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	  if (htim->Instance == TIM1) {
+	    HAL_IncTick();
+	  }
+
+	  if (htim->Instance == TIM2)
+	  {
+	    AMT212EV_ReadPosition(&amt);
+	    AMT212EV_DiffCount(&amt);
+	    AMT212EV_Compute(&amt);
+
+	    amt.radps = update_filter(amt.radps);
+	  }
+}
+
+float update_filter(float input) {
+    // Low-pass filter formula
+    filtered_value = ALPHA * input + (1.0 - ALPHA) * filtered_value;
+    return filtered_value;
 }
 /* USER CODE END Application */
 
