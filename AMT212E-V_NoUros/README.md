@@ -30,7 +30,7 @@ The AMT212E-V is a high-precision absolute encoder with a 12-bit resolution, pro
  - Add USART1_TX (normal mode)
 
 
- ![IOC_14.png](Assets/IOC_14.png)
+ <img src="Assets/IOC_14.png" alt="IOC_14.png" width="700" height="740">
  <img src="Assets/IOC_5.png" alt="IOC_5.png" width="700" height="229.310344827">
  <img src="Assets/IOC_6.png" alt="IOC_6.png" width="700" height="513.957934989">
  <img src="Assets/IOC_7.png" alt="IOC_7.png" width="700" height="519.354838708">
