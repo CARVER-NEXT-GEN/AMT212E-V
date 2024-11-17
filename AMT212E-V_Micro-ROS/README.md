@@ -137,8 +137,12 @@ Note that some of the following code requires a custom message that's from:
 #include <rmw_microros/rmw_microros.h>
 
 #include "AMT212EV.h"
+#include "PWM.h"
+#include "Controller.h"
+#include "Cytron_MDXX.h"
 
 #include <amt212ev_interfaces/msg/amt_read.h>
+#include <std_msgs/msg/float32.h>
 ```
 
 > Define Alpha for <amt.radps> low pass filter usage in the section `USER CODE BEGIN PD`
@@ -152,15 +156,28 @@ Note that some of the following code requires a custom message that's from:
 > Generate variables for Micro-ROS in `USER CODE BEGIN Variables`
 ```c
 AMT212EV amt;
+MDXX motor;
+PID_CONTROLLER pid_pos;
+
+float kp_pos = 54000.0;
+float ki_pos = 50.0;
+float kd_pos= 20.0;
+float u_max_pos = 65535.0;
+
+float cmd_vx;
+float cmd_ux;
+
+float error_pose = 0.0;
+float filtered_value = 0.0;
+float steering_angle = 0.0;
 
 rcl_node_t node;
 
 rcl_publisher_t amt_publisher;
-amt212ev_interfaces__msg__AmtRead amt_msg;
+amt212ev_interfaces__msg__AmtRead amt_msg_pub;
 
 rcl_subscription_t amt_subscription;
-
-float filtered_value = 0.0;
+amt212ev_interfaces__msg__AmtRead amt_msg_sub;
 ```
 > Paste the following code into `USER CODE BEGIN FunctionPrototypes`
 ```c
@@ -177,18 +194,22 @@ void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element,
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time);
 
 void amt_publish(double rads, double radps);
+void subscription_callback(const void * msgin);
 
 float update_filter(float input);
 ```
 > In `USER CODE BEGIN Init` include this code and remove both of them from <main.c> if it's present there.
 ```c
 AMT212EV_Init(&amt, &huart1, 1000, 16384);
+PID_CONTROLLER_Init(&pid_pos, kp_pos, ki_pos, kd_pos, u_max_pos);
+MDXX_init(&motor, &htim3, TIM_CHANNEL_2, &htim3, TIM_CHANNEL_1);
+MDXX_set_range(&motor, 1000, 0);
 HAL_TIM_Base_Start_IT(&htim2);
 ```
 > Add Micro-ROS structure in `USER CODE BEGIN StartDefaultTask`
 ```c
 
-  // micro-ROS configuration
+// micro-ROS configuration
   rmw_uros_set_custom_transport(
 	true,
 	(void *) &hlpuart1,
@@ -216,10 +237,13 @@ HAL_TIM_Base_Start_IT(&htim2);
 
   const unsigned int timer_period = RCL_MS_TO_NS(1);
   const int timeout_ms = 5000;
-  int executor_num = 1;
+  int executor_num = 2;
 
-  const rosidl_message_type_support_t * amt_type_support =
+  const rosidl_message_type_support_t * amt_pub_type_support =
   	  ROSIDL_GET_MSG_TYPE_SUPPORT(amt212ev_interfaces, msg, AmtRead);
+
+  const rosidl_message_type_support_t * amt_sub_type_support =
+    	  ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32);
 
   allocator = rcl_get_default_allocator();
 
@@ -240,10 +264,10 @@ HAL_TIM_Base_Start_IT(&htim2);
   rclc_node_init_default(&node, "uros_AMT_Node", "", &support);
 
   // create publisher
-  rclc_publisher_init_best_effort(&amt_publisher, &node, amt_type_support, "amt_publisher");
+  rclc_publisher_init_best_effort(&amt_publisher, &node, amt_pub_type_support, "amt_publisher");
 
   // create subscriber
-
+  rclc_subscription_init_default(&amt_subscription, &node, amt_sub_type_support, "steering_angle");
   // create service server
 
   // create service client
@@ -252,6 +276,7 @@ HAL_TIM_Base_Start_IT(&htim2);
   rclc_executor_init(&executor, &support.context, executor_num, &allocator);
 
   rclc_executor_add_timer(&executor, &AMT_timer);
+  rclc_executor_add_subscription(&executor, &amt_subscription, &amt_msg_sub, &subscription_callback, ON_NEW_DATA);
 
   rclc_executor_spin(&executor);
   rmw_uros_sync_session(timeout_ms);
@@ -278,10 +303,16 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 
 void amt_publish(double rads, double radps)
 {
-	amt_msg.rads = rads;
-	amt_msg.radps = radps;
-	rcl_ret_t ret = rcl_publish(&amt_publisher, &amt_msg, NULL);
+	amt_msg_pub.rads = rads;
+	amt_msg_pub.radps = radps;
+	rcl_ret_t ret = rcl_publish(&amt_publisher, &amt_msg_pub, NULL);
 	if (ret != RCL_RET_OK) printf("Error publishing (line %d)\n", __LINE__);
+}
+
+void subscription_callback(const void * msgin)
+{
+	const std_msgs__msg__Float32 * amt_msg_sub = (const std_msgs__msg__Float32 *)msgin;
+	steering_angle = amt_msg_sub->data;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -297,6 +328,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    AMT212EV_Compute(&amt);
 
 	    amt.radps = update_filter(amt.radps);
+
+	    error_pose = steering_angle - amt.rads;
+
+		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_pos, error_pose), 65535, -65535);
+		MDXX_set_range(&motor, 1000, cmd_ux * -1);
 	  }
 }
 

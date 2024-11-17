@@ -40,6 +40,9 @@
 #include <rmw_microros/rmw_microros.h>
 
 #include "AMT212EV.h"
+#include "PWM.h"
+#include "Controller.h"
+#include "Cytron_MDXX.h"
 
 #include <amt212ev_interfaces/msg/amt_read.h>
 #include <std_msgs/msg/float32.h>
@@ -64,6 +67,20 @@ typedef StaticTask_t osStaticThreadDef_t;
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 AMT212EV amt;
+MDXX motor;
+PID_CONTROLLER pid_pos;
+
+float kp_pos = 54000.0;
+float ki_pos = 50.0;
+float kd_pos= 20.0;
+float u_max_pos = 65535.0;
+
+float cmd_vx;
+float cmd_ux;
+
+float error_pose = 0.0;
+float filtered_value = 0.0;
+float steering_angle = 0.0;
 
 rcl_node_t node;
 
@@ -72,9 +89,6 @@ amt212ev_interfaces__msg__AmtRead amt_msg_pub;
 
 rcl_subscription_t amt_subscription;
 amt212ev_interfaces__msg__AmtRead amt_msg_sub;
-
-float filtered_value = 0.0;
-float steering_angle = 0;
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -121,6 +135,9 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 	AMT212EV_Init(&amt, &huart1, 1000, 16384);
+	PID_CONTROLLER_Init(&pid_pos, kp_pos, ki_pos, kd_pos, u_max_pos);
+	MDXX_init(&motor, &htim3, TIM_CHANNEL_2, &htim3, TIM_CHANNEL_1);
+	MDXX_set_range(&motor, 1000, 0);
 	HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END Init */
 
@@ -282,6 +299,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    AMT212EV_Compute(&amt);
 
 	    amt.radps = update_filter(amt.radps);
+
+	    error_pose = steering_angle - amt.rads;
+
+		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_pos, error_pose), 65535, -65535);
+		MDXX_set_range(&motor, 1000, cmd_ux * -1);
 	  }
 }
 

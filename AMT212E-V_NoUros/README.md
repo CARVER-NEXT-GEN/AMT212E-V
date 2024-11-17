@@ -38,10 +38,19 @@ The AMT212E-V is a high-precision absolute encoder with a 12-bit resolution, pro
 
 To start, download AMT212EV.h, MathOperation.h to your Inc folder and AMT212EV.c, MathOperation.c to your Src folder.
 
+Controller, Cytron_MDXX and PWM are not essential for reading AMT212E-V but it will be used later on when controlling the motor.
+
 - [AMT212EV.h](Core/Inc/AMT212EV.h)
-- [AMT212EV.c](Core/Src/AMT212EV.c)
 - [MathOperation.h](Core/Inc/MathOperation.h)
+- [Controller.h](Core/Inc/Controller.h)
+- [Cytron_MDXX.h](Core/Inc/Cytron_MDXX.h)
+- [PWM.h](Core/Inc/PWM.h)
+
+- [AMT212EV.c](Core/Src/AMT212EV.c)
 - [MathOperation.c](Core/Src/MathOperation.c)
+- [Controller.c](Core/Inc/Controller.c)
+- [Cytron_MDXX.c](Core/Inc/Cytron_MDXX.c)
+- [PWM.c](Core/Inc/PWM.c)
 
 > In the section `USER CODE BEGIN Includes` add the following line:
 

@@ -185,7 +185,8 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/ping.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/timing.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/custom_transport.h \
- ../Core/Inc/AMT212EV.h ../Core/Inc/MathOperation.h \
+ ../Core/Inc/AMT212EV.h ../Core/Inc/MathOperation.h ../Core/Inc/PWM.h \
+ ../Core/Inc/Controller.h ../Core/Inc/Cytron_MDXX.h ../Core/Inc/PWM.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/amt212ev_interfaces/msg/amt_read.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/amt212ev_interfaces/msg/detail/amt_read__struct.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/amt212ev_interfaces/msg/detail/amt_read__functions.h \
@@ -389,6 +390,10 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/custom_transport.h:
 ../Core/Inc/AMT212EV.h:
 ../Core/Inc/MathOperation.h:
+../Core/Inc/PWM.h:
+../Core/Inc/Controller.h:
+../Core/Inc/Cytron_MDXX.h:
+../Core/Inc/PWM.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/amt212ev_interfaces/msg/amt_read.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/amt212ev_interfaces/msg/detail/amt_read__struct.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/amt212ev_interfaces/msg/detail/amt_read__functions.h:
