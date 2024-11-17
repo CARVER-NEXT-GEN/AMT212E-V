@@ -24,13 +24,12 @@ The AMT212E-V is a high-precision absolute encoder with a 12-bit resolution, pro
 ### UART:
  - Select Asynchronus mode for USART1
  - Enable Hardware Flow Control (RS485)
- - set baud rate to 2000000
  - Enable USART1 global interrupt
  - Add USART1_RX and select circular mode
  - Add USART1_TX (normal mode)
 
 
- <img src="Assets/IOC_14.png" alt="IOC_14.png" width="700" height="740">
+ <img src="Assets/IOC_4.png" alt="IOC_4.png" width="700" height="809">
  <img src="Assets/IOC_5.png" alt="IOC_5.png" width="700" height="229.310344827">
  <img src="Assets/IOC_6.png" alt="IOC_6.png" width="700" height="513.957934989">
  <img src="Assets/IOC_7.png" alt="IOC_7.png" width="700" height="519.354838708">
