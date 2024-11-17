@@ -42,6 +42,7 @@
 #include "AMT212EV.h"
 
 #include <amt212ev_interfaces/msg/amt_read.h>
+#include <std_msgs/msg/float32.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -67,11 +68,13 @@ AMT212EV amt;
 rcl_node_t node;
 
 rcl_publisher_t amt_publisher;
-amt212ev_interfaces__msg__AmtRead amt_msg;
+amt212ev_interfaces__msg__AmtRead amt_msg_pub;
 
 rcl_subscription_t amt_subscription;
+amt212ev_interfaces__msg__AmtRead amt_msg_sub;
 
 float filtered_value = 0.0;
+float steering_angle = 0;
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -101,6 +104,7 @@ void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element,
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time);
 
 void amt_publish(double rads, double radps);
+void subscription_callback(const void * msgin);
 
 float update_filter(float input);
 /* USER CODE END FunctionPrototypes */
@@ -189,10 +193,13 @@ void StartDefaultTask(void *argument)
 
   const unsigned int timer_period = RCL_MS_TO_NS(1);
   const int timeout_ms = 5000;
-  int executor_num = 1;
+  int executor_num = 2;
 
-  const rosidl_message_type_support_t * amt_type_support =
+  const rosidl_message_type_support_t * amt_pub_type_support =
   	  ROSIDL_GET_MSG_TYPE_SUPPORT(amt212ev_interfaces, msg, AmtRead);
+
+  const rosidl_message_type_support_t * amt_sub_type_support =
+    	  ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32);
 
   allocator = rcl_get_default_allocator();
 
@@ -213,10 +220,10 @@ void StartDefaultTask(void *argument)
   rclc_node_init_default(&node, "uros_AMT_Node", "", &support);
 
   // create publisher
-  rclc_publisher_init_best_effort(&amt_publisher, &node, amt_type_support, "amt_publisher");
+  rclc_publisher_init_best_effort(&amt_publisher, &node, amt_pub_type_support, "amt_publisher");
 
   // create subscriber
-
+  rclc_subscription_init_default(&amt_subscription, &node, amt_sub_type_support, "steering_angle");
   // create service server
 
   // create service client
@@ -225,6 +232,7 @@ void StartDefaultTask(void *argument)
   rclc_executor_init(&executor, &support.context, executor_num, &allocator);
 
   rclc_executor_add_timer(&executor, &AMT_timer);
+  rclc_executor_add_subscription(&executor, &amt_subscription, &amt_msg_sub, &subscription_callback, ON_NEW_DATA);
 
   rclc_executor_spin(&executor);
   rmw_uros_sync_session(timeout_ms);
@@ -249,10 +257,16 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 
 void amt_publish(double rads, double radps)
 {
-	amt_msg.rads = rads;
-	amt_msg.radps = radps;
-	rcl_ret_t ret = rcl_publish(&amt_publisher, &amt_msg, NULL);
+	amt_msg_pub.rads = rads;
+	amt_msg_pub.radps = radps;
+	rcl_ret_t ret = rcl_publish(&amt_publisher, &amt_msg_pub, NULL);
 	if (ret != RCL_RET_OK) printf("Error publishing (line %d)\n", __LINE__);
+}
+
+void subscription_callback(const void * msgin)
+{
+	const std_msgs__msg__Float32 * amt_msg_sub = (const std_msgs__msg__Float32 *)msgin;
+	steering_angle = amt_msg_sub->data;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
