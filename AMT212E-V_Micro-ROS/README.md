@@ -172,7 +172,7 @@ float update_filter(float input);
 AMT212EV_Init(&amt, &huart1, 1000, 16384);
 HAL_TIM_Base_Start_IT(&htim2);
 ```
-> Finally add Micro-ROS structure in `USER CODE BEGIN StartDefaultTask`
+> Add Micro-ROS structure in `USER CODE BEGIN StartDefaultTask`
 ```c
 
   // micro-ROS configuration
@@ -250,6 +250,48 @@ HAL_TIM_Base_Start_IT(&htim2);
   {
 //	osDelay(10);
   }
+```
+
+> Finally, add this code to `USER CODE BEGIN Application`
+```c 
+void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
+{
+	if (timer != NULL)
+	{
+		amt_publish(amt.rads,amt.radps);
+		HAL_IWDG_Refresh(&hiwdg);
+	}
+}
+
+void amt_publish(double rads, double radps)
+{
+	amt_msg.rads = rads;
+	amt_msg.radps = radps;
+	rcl_ret_t ret = rcl_publish(&amt_publisher, &amt_msg, NULL);
+	if (ret != RCL_RET_OK) printf("Error publishing (line %d)\n", __LINE__);
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	  if (htim->Instance == TIM1) {
+	    HAL_IncTick();
+	  }
+
+	  if (htim->Instance == TIM2)
+	  {
+	    AMT212EV_ReadPosition(&amt);
+	    AMT212EV_DiffCount(&amt);
+	    AMT212EV_Compute(&amt);
+
+	    amt.radps = update_filter(amt.radps);
+	  }
+}
+
+float update_filter(float input) {
+    // Low-pass filter formula
+    filtered_value = ALPHA * input + (1.0 - ALPHA) * filtered_value;
+    return filtered_value;
+}
 ```
 
 Now the AMT212E-V should be able to communicate via ROS2 topic
