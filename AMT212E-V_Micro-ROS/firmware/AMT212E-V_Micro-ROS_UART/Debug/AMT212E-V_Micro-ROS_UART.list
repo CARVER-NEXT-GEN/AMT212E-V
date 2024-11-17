@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  0002d1f3  00000000  00000000  0004726e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00023206  00000000  00000000  00074461  2**0
+ 17 .debug_line   0002320a  00000000  00000000  00074461  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00112ff1  00000000  00000000  00097667  2**0
+ 18 .debug_str    00112ff1  00000000  00000000  0009766b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000076  00000000  00000000  001aa658  2**0
+ 19 .comment      00000076  00000000  00000000  001aa65c  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000081d4  00000000  00000000  001aa6d0  2**2
+ 20 .debug_frame  000081d4  00000000  00000000  001aa6d4  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000009e  00000000  00000000  001b28a4  2**0
+ 21 .debug_line_str 0000009e  00000000  00000000  001b28a8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5261,97 +5261,97 @@ void MX_LPUART1_UART_Init(void)
 
   /* USER CODE END LPUART1_Init 1 */
   hlpuart1.Instance = LPUART1;
- 800270c:	4b21      	ldr	r3, [pc, #132]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 800270e:	4a22      	ldr	r2, [pc, #136]	@ (8002798 <MX_LPUART1_UART_Init+0x90>)
+ 800270c:	4b20      	ldr	r3, [pc, #128]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 800270e:	4a21      	ldr	r2, [pc, #132]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
  8002710:	601a      	str	r2, [r3, #0]
-  hlpuart1.Init.BaudRate = 115200;
- 8002712:	4b20      	ldr	r3, [pc, #128]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 8002714:	f44f 32e1 	mov.w	r2, #115200	@ 0x1c200
- 8002718:	605a      	str	r2, [r3, #4]
+  hlpuart1.Init.BaudRate = 2000000;
+ 8002712:	4b1f      	ldr	r3, [pc, #124]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 8002714:	4a20      	ldr	r2, [pc, #128]	@ (8002798 <MX_LPUART1_UART_Init+0x90>)
+ 8002716:	605a      	str	r2, [r3, #4]
   hlpuart1.Init.WordLength = UART_WORDLENGTH_8B;
- 800271a:	4b1e      	ldr	r3, [pc, #120]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 800271c:	2200      	movs	r2, #0
- 800271e:	609a      	str	r2, [r3, #8]
+ 8002718:	4b1d      	ldr	r3, [pc, #116]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 800271a:	2200      	movs	r2, #0
+ 800271c:	609a      	str	r2, [r3, #8]
   hlpuart1.Init.StopBits = UART_STOPBITS_1;
- 8002720:	4b1c      	ldr	r3, [pc, #112]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 8002722:	2200      	movs	r2, #0
- 8002724:	60da      	str	r2, [r3, #12]
+ 800271e:	4b1c      	ldr	r3, [pc, #112]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 8002720:	2200      	movs	r2, #0
+ 8002722:	60da      	str	r2, [r3, #12]
   hlpuart1.Init.Parity = UART_PARITY_NONE;
- 8002726:	4b1b      	ldr	r3, [pc, #108]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 8002728:	2200      	movs	r2, #0
- 800272a:	611a      	str	r2, [r3, #16]
+ 8002724:	4b1a      	ldr	r3, [pc, #104]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 8002726:	2200      	movs	r2, #0
+ 8002728:	611a      	str	r2, [r3, #16]
   hlpuart1.Init.Mode = UART_MODE_TX_RX;
- 800272c:	4b19      	ldr	r3, [pc, #100]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 800272e:	220c      	movs	r2, #12
- 8002730:	615a      	str	r2, [r3, #20]
+ 800272a:	4b19      	ldr	r3, [pc, #100]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 800272c:	220c      	movs	r2, #12
+ 800272e:	615a      	str	r2, [r3, #20]
   hlpuart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
- 8002732:	4b18      	ldr	r3, [pc, #96]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 8002734:	2200      	movs	r2, #0
- 8002736:	619a      	str	r2, [r3, #24]
+ 8002730:	4b17      	ldr	r3, [pc, #92]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 8002732:	2200      	movs	r2, #0
+ 8002734:	619a      	str	r2, [r3, #24]
   hlpuart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
- 8002738:	4b16      	ldr	r3, [pc, #88]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 800273a:	2200      	movs	r2, #0
- 800273c:	621a      	str	r2, [r3, #32]
+ 8002736:	4b16      	ldr	r3, [pc, #88]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 8002738:	2200      	movs	r2, #0
+ 800273a:	621a      	str	r2, [r3, #32]
   hlpuart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
- 800273e:	4b15      	ldr	r3, [pc, #84]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 8002740:	2200      	movs	r2, #0
- 8002742:	625a      	str	r2, [r3, #36]	@ 0x24
+ 800273c:	4b14      	ldr	r3, [pc, #80]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 800273e:	2200      	movs	r2, #0
+ 8002740:	625a      	str	r2, [r3, #36]	@ 0x24
   hlpuart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
- 8002744:	4b13      	ldr	r3, [pc, #76]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 8002746:	2200      	movs	r2, #0
- 8002748:	629a      	str	r2, [r3, #40]	@ 0x28
+ 8002742:	4b13      	ldr	r3, [pc, #76]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 8002744:	2200      	movs	r2, #0
+ 8002746:	629a      	str	r2, [r3, #40]	@ 0x28
   if (HAL_UART_Init(&hlpuart1) != HAL_OK)
- 800274a:	4812      	ldr	r0, [pc, #72]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 800274c:	f003 fbce 	bl	8005eec <HAL_UART_Init>
- 8002750:	4603      	mov	r3, r0
- 8002752:	2b00      	cmp	r3, #0
- 8002754:	d001      	beq.n	800275a <MX_LPUART1_UART_Init+0x52>
+ 8002748:	4811      	ldr	r0, [pc, #68]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 800274a:	f003 fbcf 	bl	8005eec <HAL_UART_Init>
+ 800274e:	4603      	mov	r3, r0
+ 8002750:	2b00      	cmp	r3, #0
+ 8002752:	d001      	beq.n	8002758 <MX_LPUART1_UART_Init+0x50>
   {
     Error_Handler();
- 8002756:	f7ff fb4a 	bl	8001dee <Error_Handler>
+ 8002754:	f7ff fb4b 	bl	8001dee <Error_Handler>
   }
   if (HAL_UARTEx_SetTxFifoThreshold(&hlpuart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
- 800275a:	2100      	movs	r1, #0
- 800275c:	480d      	ldr	r0, [pc, #52]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 800275e:	f005 f947 	bl	80079f0 <HAL_UARTEx_SetTxFifoThreshold>
- 8002762:	4603      	mov	r3, r0
- 8002764:	2b00      	cmp	r3, #0
- 8002766:	d001      	beq.n	800276c <MX_LPUART1_UART_Init+0x64>
+ 8002758:	2100      	movs	r1, #0
+ 800275a:	480d      	ldr	r0, [pc, #52]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 800275c:	f005 f948 	bl	80079f0 <HAL_UARTEx_SetTxFifoThreshold>
+ 8002760:	4603      	mov	r3, r0
+ 8002762:	2b00      	cmp	r3, #0
+ 8002764:	d001      	beq.n	800276a <MX_LPUART1_UART_Init+0x62>
   {
     Error_Handler();
- 8002768:	f7ff fb41 	bl	8001dee <Error_Handler>
+ 8002766:	f7ff fb42 	bl	8001dee <Error_Handler>
   }
   if (HAL_UARTEx_SetRxFifoThreshold(&hlpuart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
- 800276c:	2100      	movs	r1, #0
- 800276e:	4809      	ldr	r0, [pc, #36]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 8002770:	f005 f97c 	bl	8007a6c <HAL_UARTEx_SetRxFifoThreshold>
- 8002774:	4603      	mov	r3, r0
- 8002776:	2b00      	cmp	r3, #0
- 8002778:	d001      	beq.n	800277e <MX_LPUART1_UART_Init+0x76>
+ 800276a:	2100      	movs	r1, #0
+ 800276c:	4808      	ldr	r0, [pc, #32]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 800276e:	f005 f97d 	bl	8007a6c <HAL_UARTEx_SetRxFifoThreshold>
+ 8002772:	4603      	mov	r3, r0
+ 8002774:	2b00      	cmp	r3, #0
+ 8002776:	d001      	beq.n	800277c <MX_LPUART1_UART_Init+0x74>
   {
     Error_Handler();
- 800277a:	f7ff fb38 	bl	8001dee <Error_Handler>
+ 8002778:	f7ff fb39 	bl	8001dee <Error_Handler>
   }
   if (HAL_UARTEx_DisableFifoMode(&hlpuart1) != HAL_OK)
- 800277e:	4805      	ldr	r0, [pc, #20]	@ (8002794 <MX_LPUART1_UART_Init+0x8c>)
- 8002780:	f005 f8fd 	bl	800797e <HAL_UARTEx_DisableFifoMode>
- 8002784:	4603      	mov	r3, r0
- 8002786:	2b00      	cmp	r3, #0
- 8002788:	d001      	beq.n	800278e <MX_LPUART1_UART_Init+0x86>
+ 800277c:	4804      	ldr	r0, [pc, #16]	@ (8002790 <MX_LPUART1_UART_Init+0x88>)
+ 800277e:	f005 f8fe 	bl	800797e <HAL_UARTEx_DisableFifoMode>
+ 8002782:	4603      	mov	r3, r0
+ 8002784:	2b00      	cmp	r3, #0
+ 8002786:	d001      	beq.n	800278c <MX_LPUART1_UART_Init+0x84>
   {
     Error_Handler();
- 800278a:	f7ff fb30 	bl	8001dee <Error_Handler>
+ 8002788:	f7ff fb31 	bl	8001dee <Error_Handler>
   }
   /* USER CODE BEGIN LPUART1_Init 2 */
 
   /* USER CODE END LPUART1_Init 2 */
 
 }
- 800278e:	bf00      	nop
- 8002790:	bd80      	pop	{r7, pc}
- 8002792:	bf00      	nop
- 8002794:	20003e30 	.word	0x20003e30
- 8002798:	40008000 	.word	0x40008000
+ 800278c:	bf00      	nop
+ 800278e:	bd80      	pop	{r7, pc}
+ 8002790:	20003e30 	.word	0x20003e30
+ 8002794:	40008000 	.word	0x40008000
+ 8002798:	001e8480 	.word	0x001e8480
 
 0800279c <MX_USART1_UART_Init>:
 /* USART1 init function */
