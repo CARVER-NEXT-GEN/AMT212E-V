@@ -65,10 +65,13 @@ Assuming you already have a docker;
 
 ### LPUART1
 
+- Set baud rate to 2000000
 - Enable Asynchronus mode for LPUART1
 - Add Rx and Tx in DMA Settings both with `very high` priority
 - Select Circular mode for Rx
 - Enable global interrupt in NVIC setting
+
+![IOC_13.png](/AMT212E-V_Micro-ROS/Assets/IOC_13.png)
 
 ![IOC_11.png](/AMT212E-V_Micro-ROS/Assets/IOC_11.png)
 ![IOC_12.png](/AMT212E-V_Micro-ROS/Assets/IOC_12.png)
