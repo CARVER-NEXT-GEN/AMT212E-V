@@ -70,20 +70,20 @@ Assuming you already have a docker;
 
 ** if you intend to write in main change Code Generation option to `as weak` but normally if you write in app_freertos this is nor required.
 
-![IOC_8.png](/Assets/IOC_8.png)
+![IOC_8.png](/AMT212E-V_Micro-ROS/Assets/IOC_8.png)
 
 ### Watchdog
 
 - Activate IWDG
 - Set down-counter reload value to 2499
 
-![IOC_9.png](/Assets/IOC_9.png)
+![IOC_9.png](/AMT212E-V_Micro-ROS/Assets/IOC_9.png)
 
 ### Optional
 
 Select `Generate peripheral initialization as a pair of '.c/.h' files per peripherlal` to make main.c more tidy.
 
-![IOC_10.png](/Assets/IOC_10.png)
+![IOC_10.png](/AMT212E-V_Micro-ROS/Assets/IOC_10.png)
 
 ### Grant permission for docker
 
@@ -95,7 +95,7 @@ sudo chmod 666 /var/run/docker.sock
 
 ### Build your project 
 
-![build.png](/Assets/build.png)
+![build.png](/AMT212E-V_Micro-ROS/Assets/build.png)
 
 The build process may take some time, Please wait patiently until it completes.
 
