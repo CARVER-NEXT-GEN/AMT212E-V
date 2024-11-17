@@ -51,9 +51,9 @@ Assuming you already have a docker;
 
 	Rebuild the index if asked to do.
 
-4. Add the following source code files to your project, dragging them to source folder:
+4. Add the following source code files to your project, copy them to source folder:
 
-	- [microros_time.c](/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils/extra_sources/microros_time.c)
-	- [extra_sources/microros_allocators.c](/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils/extra_sources/microros_allocators.c)
-	- [extra_sources/custom_memory_manager.c](/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c)
-	- [extra_sources/microros_transports/dma_transport.c](/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils/extra_sources/microros_transports/dma_transport.c) or your transport selection.
+	- [microros_time.c](/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils/extra_sources/microros_time.c)
+	- [extra_sources/microros_allocators.c](/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils/extra_sources/microros_allocators.c)
+	- [extra_sources/custom_memory_manager.c](/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c)
+	- [extra_sources/microros_transports/dma_transport.c](/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/micro_ros_stm32cubemx_utils/extra_sources/microros_transports/dma_transport.c) or your transport selection.
