@@ -63,6 +63,16 @@ Assuming you already have a docker;
 
 ## setting up .ioc
 
+### LPUART1
+
+- Enable Asynchronus mode for LPUART1
+- Add Rx and Tx in DMA Settings both with `very high` priority
+- Select Circular mode for Rx
+- Enable global interrupt in NVIC setting
+
+![IOC_11.png](/AMT212E-V_Micro-ROS/Assets/IOC_11.png)
+![IOC_12.png](/AMT212E-V_Micro-ROS/Assets/IOC_12.png)
+
 ### FreeRTOS
 - In the tab `Tasks and Queues`, select CMSIS_V2 option for interface
 - change stack size to 3000
