@@ -303,7 +303,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    error_pose = steering_angle - amt.rads;
 
 		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_pos, error_pose), 65535, -65535);
-		MDXX_set_range(&motor, 1000, cmd_ux);
+		MDXX_set_range(&motor, 1000, cmd_ux * -1);
 	  }
 }
 

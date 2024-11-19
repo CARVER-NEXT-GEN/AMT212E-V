@@ -70,9 +70,9 @@ AMT212EV amt;
 MDXX motor;
 PID_CONTROLLER pid_pos;
 
-float kp_pos = 54000.0;
-float ki_pos = 50.0;
-float kd_pos= 20.0;
+float kp_pos = 1000.0;
+float ki_pos = 0.0;
+float kd_pos= 0.0;
 float u_max_pos = 65535.0;
 
 float cmd_vx;

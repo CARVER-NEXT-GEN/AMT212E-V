@@ -70,9 +70,9 @@ AMT212EV amt;
 MDXX motor;
 PID_CONTROLLER pid_pos;
 
-float kp_pos = 54000.0;
-float ki_pos = 50.0;
-float kd_pos= 20.0;
+float kp_pos = 1000.0;
+float ki_pos = 10.0;
+float kd_pos= 0.0;
 float u_max_pos = 65535.0;
 
 float cmd_vx;
@@ -303,7 +303,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    error_pose = steering_angle - amt.rads;
 
 		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_pos, error_pose), 65535, -65535);
-		MDXX_set_range(&motor, 1000, cmd_ux);
+		MDXX_set_range(&motor, 1000, cmd_ux * -1);
 	  }
 }
 
