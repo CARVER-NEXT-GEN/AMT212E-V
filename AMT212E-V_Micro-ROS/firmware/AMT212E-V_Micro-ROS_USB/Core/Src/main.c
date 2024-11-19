@@ -94,10 +94,10 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_TIM2_Init();
-  MX_TIM3_Init();
   MX_USART1_UART_Init();
   MX_LPUART1_UART_Init();
   MX_IWDG_Init();
+  MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
 //  AMT212EV_Init(&amt, &huart1, 1000, 16384);
 //  HAL_TIM_Base_Start_IT(&htim2);
