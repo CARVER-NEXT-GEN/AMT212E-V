@@ -82,8 +82,8 @@ float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
 
-float limit_left = 0.75;
-float limit_right = -0.6;
+float limit_left = 0.7;
+float limit_right = -0.5;
 
 rcl_node_t node;
 
@@ -138,6 +138,7 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 	AMT212EV_Init(&amt, &huart1, 1000, 16384);
+//	AMT212EV_Flip(&amt);
 	PID_CONTROLLER_Init(&pid_pos, kp_pos, ki_pos, kd_pos, u_max_pos);
 	MDXX_init(&motor, &htim8, TIM_CHANNEL_3, &htim8, TIM_CHANNEL_1);
 	MDXX_set_range(&motor, 1000, 0);
@@ -297,7 +298,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	  if (htim->Instance == TIM2)
 	  {
-		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_SET)
+		if (HAL_GPIO_ReadPin(GPIOC, GPIO_Pin_13) == GPIO_PIN_SET)
 		{
 			AMT212EV_SetZero(&amt);
 		}

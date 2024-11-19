@@ -23,7 +23,7 @@ void AMT212EV_Init(AMT212EV *amt212ev ,UART_HandleTypeDef *huartx,uint16_t freq,
 	amt212ev->right_limit = 0;
 	amt212ev->dir = 1;
 	amt212ev->raw_count = 0;
-	amt212ev->enc_home_pos = 0;
+	amt212ev->enc_home_pos = 2810;
 	amt212ev->degree = 0;
 	amt212ev->c[1] = 0;
 	amt212ev->c[0] = 0;
@@ -128,7 +128,7 @@ void AMT212EV_Compute(AMT212EV *amt212ev){
 
 
 	amt212ev->pps = (amt212ev->diff_count * (float)amt212ev->freq) ; // Pulse per second
-	amt212ev->radps = amt212ev->pps * 2 * M_PI / (float)amt212ev->cpr; // Radian per second
+	amt212ev->radps = amt212ev->pps * 2 * M_PI / (float)amt212ev->cpr;; // Radian per second
 	amt212ev->rpm = amt212ev->pps * 60.0 / (float)amt212ev->cpr; // Round per second
 
 

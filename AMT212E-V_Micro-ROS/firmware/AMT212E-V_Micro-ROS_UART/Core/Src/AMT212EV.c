@@ -21,9 +21,9 @@ void AMT212EV_Init(AMT212EV *amt212ev ,UART_HandleTypeDef *huartx,uint16_t freq,
 	amt212ev->cpr = cpr;
 	amt212ev->left_limit = 0;
 	amt212ev->right_limit = 0;
-	amt212ev->dir = -1;
+	amt212ev->dir = 1;
 	amt212ev->raw_count = 0;
-	amt212ev->enc_home_pos = 2810;
+	amt212ev->enc_home_pos = 0;
 	amt212ev->degree = 0;
 	amt212ev->c[1] = 0;
 	amt212ev->c[0] = 0;

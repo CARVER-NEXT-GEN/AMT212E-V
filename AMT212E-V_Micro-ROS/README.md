@@ -171,6 +171,9 @@ float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
 
+float limit_left = 0.75;
+float limit_right = -0.6;
+
 rcl_node_t node;
 
 rcl_publisher_t amt_publisher;
@@ -208,7 +211,6 @@ HAL_TIM_Base_Start_IT(&htim2);
 ```
 > Add Micro-ROS structure in `USER CODE BEGIN StartDefaultTask`
 ```c
-
 // micro-ROS configuration
   rmw_uros_set_custom_transport(
 	true,
@@ -323,16 +325,26 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	  if (htim->Instance == TIM2)
 	  {
+		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_SET)
+		{
+			AMT212EV_SetZero(&amt);
+		}
+
 	    AMT212EV_ReadPosition(&amt);
 	    AMT212EV_DiffCount(&amt);
 	    AMT212EV_Compute(&amt);
 
 	    amt.radps = update_filter(amt.radps);
 
+	    if (steering_angle > limit_left) steering_angle = limit_left;
+	    if (steering_angle < limit_right) steering_angle = limit_right;
+	    if (amt.rads > limit_left) steering_angle = limit_left;
+		if (amt.rads < limit_right) steering_angle = limit_right;
+
 	    error_pose = steering_angle - amt.rads;
 
 		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_pos, error_pose), 65535, -65535);
-		MDXX_set_range(&motor, 1000, cmd_ux);
+		MDXX_set_range(&motor, 1000, cmd_ux * -1);
 	  }
 }
 
