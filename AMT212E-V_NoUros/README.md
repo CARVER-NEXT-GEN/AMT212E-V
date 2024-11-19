@@ -3,7 +3,7 @@ The AMT212E-V is a high-precision absolute encoder with a 12-bit resolution, pro
 
 ## Setting up .ioc
 
-<img src="Assets/IOC_main.png" alt="IOC_main.png" width="700" height="566.236811253">
+<img src="Assets/IOC_main_new.png" alt="IOC_main_new.png" width="700" height="550">
 
 ### Timer 2:
  - Enable Internal Clock option for Clock Source
@@ -11,15 +11,15 @@ The AMT212E-V is a high-precision absolute encoder with a 12-bit resolution, pro
  - Set Counter Period to 1000
  - Enable TIM2 global interrupt
 
-<img src="Assets/IOC_1.png" alt="IOC_1.png" width="700" height="794">
+<img src="Assets/IOC_1_new.png" alt="IOC_1_new.png" width="700" height="710">
 <img src="Assets/IOC_2.png" alt="IOC_2.png" width="700" height="143.45">
 
-### Timer 3:
- - Set PWM Generation CH1 for Channel1 of Timer3
- - Set PWM Generation CH2 for Channel2 of Timer3
+### Timer 8:
+ - Set PWM Generation CH1 for Channel1 of Timer8
+ - Set PWM Generation CH2 for Channel3 of Timer8
 
 
-<img src="Assets/IOC_3.png" alt="IOC_3.png" width="700" height="826.099290781">
+<img src="Assets/IOC_3_new.png" alt="IOC_3_new.png" width="700" height="710">
 
 ### UART:
  - Select Asynchronus mode for USART1
@@ -29,7 +29,7 @@ The AMT212E-V is a high-precision absolute encoder with a 12-bit resolution, pro
  - Add USART1_TX (normal mode)
 
 
- <img src="Assets/IOC_4.png" alt="IOC_4.png" width="700" height="809">
+ <img src="Assets/IOC_4_new.png" alt="IOC_4_new.png" width="700" height="710">
  <img src="Assets/IOC_5.png" alt="IOC_5.png" width="700" height="229.310344827">
  <img src="Assets/IOC_6.png" alt="IOC_6.png" width="700" height="513.957934989">
  <img src="Assets/IOC_7.png" alt="IOC_7.png" width="700" height="519.354838708">

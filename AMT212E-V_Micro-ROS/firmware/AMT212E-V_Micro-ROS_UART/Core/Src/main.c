@@ -97,7 +97,6 @@ int main(void)
   MX_IWDG_Init();
   MX_TIM2_Init();
   MX_USART1_UART_Init();
-  MX_TIM3_Init();
   MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
 
@@ -183,6 +182,18 @@ void SystemClock_Config(void)
   * @param  htim : TIM handle
   * @retval None
   */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM1) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
 
 /**
   * @brief  This function is executed in case of error occurrence.

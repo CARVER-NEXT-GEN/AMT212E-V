@@ -202,7 +202,7 @@ float update_filter(float input);
 ```c
 AMT212EV_Init(&amt, &huart1, 1000, 16384);
 PID_CONTROLLER_Init(&pid_pos, kp_pos, ki_pos, kd_pos, u_max_pos);
-MDXX_init(&motor, &htim3, TIM_CHANNEL_2, &htim3, TIM_CHANNEL_1);
+MDXX_init(&motor, &htim8, TIM_CHANNEL_3, &htim8, TIM_CHANNEL_1);
 MDXX_set_range(&motor, 1000, 0);
 HAL_TIM_Base_Start_IT(&htim2);
 ```
@@ -332,7 +332,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    error_pose = steering_angle - amt.rads;
 
 		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_pos, error_pose), 65535, -65535);
-		MDXX_set_range(&motor, 1000, cmd_ux * -1);
+		MDXX_set_range(&motor, 1000, cmd_ux);
 	  }
 }
 
