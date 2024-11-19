@@ -71,13 +71,13 @@ MDXX motor;
 PID_CONTROLLER pid_pos;
 PID_CONTROLLER pid_vel;
 
-float kp_pos = 5000.0;
+float kp_pos = 0.0;
 float ki_pos = 0.0;
 float kd_pos= 0.0;
 float u_max_pos = 65535.0;
 
-float kp_vel = 10000.0;
-float ki_vel = 1.0;
+float kp_vel = 5000.0;
+float ki_vel = 0.0;
 float kd_vel= 0.0;
 float u_max_vel = 65535.0;
 
@@ -88,7 +88,7 @@ float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
 
-float setpoint_velo = 0.0;
+float setpoint_velo = 1.0;
 
 float limit_left = 0.6;
 float limit_right = -0.6;

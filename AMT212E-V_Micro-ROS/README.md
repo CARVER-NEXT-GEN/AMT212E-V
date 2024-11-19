@@ -355,4 +355,4 @@ float update_filter(float input) {
 }
 ```
 
-Now the AMT212E-V should be able to communicate via ROS2 topic
+Now the AMT212E-V should be able to communicate via ROS2 topic and PID control loop should be working properly if tuned correctly.
