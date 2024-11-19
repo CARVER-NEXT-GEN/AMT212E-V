@@ -82,8 +82,8 @@ float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
 
-float limit_left = 0.7;
-float limit_right = -0.5;
+float limit_left = -0.7;
+float limit_right = 0.5;
 
 rcl_node_t node;
 

@@ -82,9 +82,6 @@ float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
 
-float limit_left = 0.7;
-float limit_right = -0.5;
-
 rcl_node_t node;
 
 rcl_publisher_t amt_publisher;
@@ -138,7 +135,6 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 	AMT212EV_Init(&amt, &huart1, 1000, 16384);
-	AMT212EV_Flip(&amt);
 	PID_CONTROLLER_Init(&pid_pos, kp_pos, ki_pos, kd_pos, u_max_pos);
 	MDXX_init(&motor, &htim8, TIM_CHANNEL_3, &htim8, TIM_CHANNEL_1);
 	MDXX_set_range(&motor, 1000, 0);
@@ -304,13 +300,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	    amt.radps = update_filter(amt.radps);
 
-	    if (amt.rads > limit_left) steering_angle = limit_left;
-		if (amt.rads < limit_right) steering_angle = limit_right;
-
 	    error_pose = steering_angle - amt.rads;
 
 		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_pos, error_pose), 65535, -65535);
-		MDXX_set_range(&motor, 1000, cmd_ux * -1);
+		MDXX_set_range(&motor, 1000, cmd_ux);
 	  }
 }
 

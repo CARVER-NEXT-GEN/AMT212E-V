@@ -45,8 +45,8 @@ enum{
 // Initial the encoder profile
 void AMT212EV_Init(AMT212EV *amt212ev ,UART_HandleTypeDef *huartx, uint16_t freq,int16_t cpr);
 
-//// Flip an encoder
-//void AMT212EV_Flip(AMT212EV *amt212ev);
+// Flip an encoder
+void AMT212EV_Flip(AMT212EV *amt212ev);
 
 // Read position
 void AMT212EV_ReadPosition(AMT212EV *amt212ev);
