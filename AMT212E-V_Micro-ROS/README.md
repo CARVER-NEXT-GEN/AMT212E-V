@@ -158,11 +158,17 @@ Note that some of the following code requires a custom message that's from:
 AMT212EV amt;
 MDXX motor;
 PID_CONTROLLER pid_pos;
+PID_CONTROLLER pid_vel;
 
-float kp_pos = 54000.0;
-float ki_pos = 50.0;
-float kd_pos= 20.0;
+float kp_pos = 4.0;
+float ki_pos = 0.004;
+float kd_pos= 0.0;
 float u_max_pos = 65535.0;
+
+float kp_vel = 11500.0;
+float ki_vel = 0.02;
+float kd_vel= 0.0;
+float u_max_vel = 65535.0;
 
 float cmd_vx;
 float cmd_ux;
@@ -170,9 +176,6 @@ float cmd_ux;
 float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
-
-float limit_left = 0.75;
-float limit_right = -0.6;
 
 rcl_node_t node;
 
@@ -325,6 +328,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	  if (htim->Instance == TIM2)
 	  {
+
 		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_SET)
 		{
 			AMT212EV_SetZero(&amt);
@@ -336,14 +340,27 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	    amt.radps = update_filter(amt.radps);
 
-	    if (steering_angle > limit_left) steering_angle = limit_left;
-	    if (steering_angle < limit_right) steering_angle = limit_right;
-	    if (amt.rads > limit_left) steering_angle = limit_left;
-		if (amt.rads < limit_right) steering_angle = limit_right;
+	    if (steering_angle >= (0.61))
+	    	{
+	    	steering_angle = 0.6;
+	    	}
+	    if (steering_angle <= (-0.61))
+	    	{
+	    	steering_angle = -0.6;
+	    	}
+	    if (amt.rads >= (0.7))
+			{
+			steering_angle = 0.6;
+			}
+		if (amt.rads <= (-0.7))
+			{
+			steering_angle = -0.6;
+			}
 
 	    error_pose = steering_angle - amt.rads;
 
-		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_pos, error_pose), 65535, -65535);
+	    cmd_vx = PID_CONTROLLER_Compute(&pid_pos,error_pose);
+		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx), 65535, -65535);
 		MDXX_set_range(&motor, 1000, cmd_ux * -1);
 	  }
 }
