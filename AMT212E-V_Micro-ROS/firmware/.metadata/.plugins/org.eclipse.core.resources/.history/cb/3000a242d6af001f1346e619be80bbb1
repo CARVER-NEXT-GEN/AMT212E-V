@@ -71,8 +71,8 @@ MDXX motor;
 PID_CONTROLLER pid_pos;
 PID_CONTROLLER pid_vel;
 
-float kp_pos = 0.0;
-float ki_pos = 0.0;
+float kp_pos = 4.0;
+float ki_pos = 0.004;
 float kd_pos= 0.0;
 float u_max_pos = 65535.0;
 
@@ -88,11 +88,7 @@ float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
 
-float setpoint_velo = 0.0;
-float cc = 2;
-
-float limit_left = 0.6;
-float limit_right = -0.6;
+int16_t sync_counter = 1000;
 
 rcl_node_t node;
 
@@ -281,6 +277,10 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 	if (timer != NULL)
 	{
 		amt_publish(amt.rads,amt.radps);
+//		if (uwTick >= sync_counter) {  // Sync session at lower frequency
+//			rmw_uros_sync_session(1000);
+//			sync_counter += 1000;
+//		}
 		HAL_IWDG_Refresh(&hiwdg);
 	}
 }
@@ -307,24 +307,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	  if (htim->Instance == TIM2)
 	  {
-		if (HAL_GetTick() % 1000 == 0)
-		{
-//			steering_angle += cc;
-			setpoint_velo += cc;
-
-		}
-//		if (steering_angle == 2 || steering_angle == -2)
-//		{
-//			cc *= -1;
-//		}
-		if (setpoint_velo >= 4)
-		{
-			cc = -2;
-		}
-		if (setpoint_velo <= -4)
-		{
-			cc = 2;
-		}
 
 		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_SET)
 		{
@@ -337,15 +319,27 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	    amt.radps = update_filter(amt.radps);
 
-//	    if (steering_angle > limit_left) steering_angle = limit_left;
-//	    if (steering_angle < limit_right) steering_angle = limit_right;
-//	    if (amt.rads > limit_left) steering_angle = limit_left;
-//		if (amt.rads < limit_right) steering_angle = limit_right;
+	    if (steering_angle >= (0.61))
+	    	{
+	    	steering_angle = 0.6;
+	    	}
+	    if (steering_angle <= (-0.61))
+	    	{
+	    	steering_angle = -0.6;
+	    	}
+	    if (amt.rads >= (0.7))
+			{
+			steering_angle = 0.6;
+			}
+		if (amt.rads <= (-0.7))
+			{
+			steering_angle = -0.6;
+			}
 
 	    error_pose = steering_angle - amt.rads;
 
 	    cmd_vx = PID_CONTROLLER_Compute(&pid_pos,error_pose);
-		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx + setpoint_velo), 65535, -65535);
+		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx), 65535, -65535);
 		MDXX_set_range(&motor, 1000, cmd_ux * -1);
 	  }
 }

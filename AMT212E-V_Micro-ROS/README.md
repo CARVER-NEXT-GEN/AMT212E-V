@@ -177,6 +177,8 @@ float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
 
+int16_t sync_counter = 1000;
+
 rcl_node_t node;
 
 rcl_publisher_t amt_publisher;
@@ -302,6 +304,10 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 	if (timer != NULL)
 	{
 		amt_publish(amt.rads,amt.radps);
+		if (uwTick >= sync_counter) {  // Sync session at lower frequency
+			rmw_uros_sync_session(1000);
+			sync_counter += 1000;
+		}
 		HAL_IWDG_Refresh(&hiwdg);
 	}
 }
