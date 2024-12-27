@@ -53,3 +53,414 @@ arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf
  111468	    624	  46200	 158292	  26a54	AMT212E-V_Micro-ROS_UART.elf
 Finished building: default.size.stdout
  
+16:17:10 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 111468	    624	  46200	 158292	  26a54	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+16:35:27 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 111468	    624	  46200	 158292	  26a54	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+21:58:42 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 111484	    624	  46200	 158308	  26a64	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:06:24 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 111500	    624	  46208	 158332	  26a7c	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:14:24 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 111508	    624	  46208	 158340	  26a84	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:15:46 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+../Core/Src/app_freertos.c: In function 'amt_publish':
+../Core/Src/app_freertos.c:306:19: warning: unused variable 'ret' [-Wunused-variable]
+  306 |         rcl_ret_t ret = rcl_publish(&amt_publisher, &amt_msg_pub, NULL);
+      |                   ^~~
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 111460	    624	  46208	 158292	  26a54	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:19:03 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 111508	    624	  46208	 158340	  26a84	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:33:41 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 112404	    624	  46216	 159244	  26e0c	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:38:43 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 112324	    624	  46208	 159156	  26db4	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:45:33 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 112372	    624	  46208	 159204	  26de4	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:52:09 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 111436	    620	  46200	 158256	  26a30	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+22:59:12 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 112372	    624	  46208	 159204	  26de4	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+23:08:18 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 112388	    624	  46208	 159220	  26df4	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+23:14:49 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 112372	    620	  46216	 159208	  26de8	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+23:31:57 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "AMT212E-V_Micro-ROS_UART.elf" @"objects.list"  -lmicroros -mcpu=cortex-m4 -T"/home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AMT212E-V_Micro-ROS_UART.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.16.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.200.202406132123/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: AMT212E-V_Micro-ROS_UART.elf
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+arm-none-eabi-objdump -h -S AMT212E-V_Micro-ROS_UART.elf  > "AMT212E-V_Micro-ROS_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+ 112372	    620	  46216	 159208	  26de8	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: AMT212E-V_Micro-ROS_UART.list
+ 
+23:32:33 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 112372	    620	  46216	 159208	  26de8	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 
+23:35:16 **** Incremental Build of configuration Debug for project AMT212E-V_Micro-ROS_UART ****
+make -j16 all 
+echo "Kireiji_02" | sudo -S docker pull microros/micro_ros_static_library_builder:humble && echo "Kireiji_02" | sudo -S docker run --rm -v /home/kireiji/Documents/GitHub/CARVER/AMT212E-V/AMT212E-V/AMT212E-V_Micro-ROS/firmware/AMT212E-V_Micro-ROS_UART:/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+humble: Pulling from microros/micro_ros_static_library_builder
+Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
+Status: Image is up to date for microros/micro_ros_static_library_builder:humble
+docker.io/microros/micro_ros_static_library_builder:humble
+[sudo] password for kireiji: dos2unix: converting file /project/micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+micro-ROS library found. Skipping...
+Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
+ 
+arm-none-eabi-size  AMT212E-V_Micro-ROS_UART.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 112372	    620	  46216	 159208	  26de8	AMT212E-V_Micro-ROS_UART.elf
+Finished building: default.size.stdout
+ 

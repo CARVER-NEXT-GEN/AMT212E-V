@@ -46,6 +46,7 @@
 
 #include <amt212ev_interfaces/msg/amt_read.h>
 #include <std_msgs/msg/float32.h>
+#include <std_msgs/msg/int8.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -87,6 +88,7 @@ float cmd_ux;
 float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
+int8_t steering_mode = 0.0;
 
 int16_t sync_counter = 1000;
 
@@ -97,6 +99,11 @@ amt212ev_interfaces__msg__AmtRead amt_msg_pub;
 
 rcl_subscription_t amt_subscription;
 amt212ev_interfaces__msg__AmtRead amt_msg_sub;
+
+rcl_subscription_t amt_subscription_mode;
+amt212ev_interfaces__msg__AmtRead amt_msg_sub_mode;
+
+uint64_t cc = 0;
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -127,6 +134,7 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time);
 
 void amt_publish(double rads, double radps);
 void subscription_callback(const void * msgin);
+void subscription_callback_mode(const void * msgin);
 
 float update_filter(float input);
 /* USER CODE END FunctionPrototypes */
@@ -219,13 +227,16 @@ void StartDefaultTask(void *argument)
 
   const unsigned int timer_period = RCL_MS_TO_NS(1);
   const int timeout_ms = 5000;
-  int executor_num = 2;
+  int executor_num = 3;
 
   const rosidl_message_type_support_t * amt_pub_type_support =
   	  ROSIDL_GET_MSG_TYPE_SUPPORT(amt212ev_interfaces, msg, AmtRead);
 
   const rosidl_message_type_support_t * amt_sub_type_support =
     	  ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32);
+
+  const rosidl_message_type_support_t * amt_sub_type_support_mode =
+    	  ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int8);
 
   allocator = rcl_get_default_allocator();
 
@@ -250,6 +261,7 @@ void StartDefaultTask(void *argument)
 
   // create subscriber
   rclc_subscription_init_default(&amt_subscription, &node, amt_sub_type_support, "steering_angle");
+  rclc_subscription_init_default(&amt_subscription_mode, &node, amt_sub_type_support_mode, "steering_mode");
   // create service server
 
   // create service client
@@ -259,6 +271,7 @@ void StartDefaultTask(void *argument)
 
   rclc_executor_add_timer(&executor, &AMT_timer);
   rclc_executor_add_subscription(&executor, &amt_subscription, &amt_msg_sub, &subscription_callback, ON_NEW_DATA);
+  rclc_executor_add_subscription(&executor, &amt_subscription_mode, &amt_msg_sub_mode, &subscription_callback_mode, ON_NEW_DATA);
 
   rclc_executor_spin(&executor);
   rmw_uros_sync_session(timeout_ms);
@@ -272,18 +285,46 @@ void StartDefaultTask(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+//void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
+//{
+//	if (timer != NULL)
+//	{
+//		amt_publish(amt.rads,amt.radps);
+//		if (uwTick >= sync_counter) {  // Sync session at lower frequency
+//			rmw_uros_sync_session(1000);
+//			sync_counter += 1000;
+//		}
+//		HAL_IWDG_Refresh(&hiwdg);
+//		cc++;
+//	}
+//}
+
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 {
-	if (timer != NULL)
-	{
-		amt_publish(amt.rads,amt.radps);
-		if (uwTick >= sync_counter) {  // Sync session at lower frequency
-			rmw_uros_sync_session(1000);
-			sync_counter += 1000;
-		}
-		HAL_IWDG_Refresh(&hiwdg);
-	}
+    if (timer != NULL)
+    {
+        // Publish data
+        amt_publish(amt.rads, amt.radps);
+
+        static uint32_t sync_counter = 0;
+        // Sync session at a lower frequency
+        if (sync_counter <= HAL_GetTick()) {
+            if (rmw_uros_ping_agent(100, 1) == RMW_RET_OK) {
+                rmw_uros_sync_session(1000); // Sync if agent is reachable
+            	cc++;
+            } else {
+                // If the agent is not reachable, let the watchdog reset the MCU
+            	NVIC_SystemReset();
+            }
+            sync_counter += 1000;
+        }
+
+        // Refresh watchdog to prevent reset during normal operation
+        HAL_IWDG_Refresh(&hiwdg);
+
+    }
 }
+
 
 void amt_publish(double rads, double radps)
 {
@@ -297,6 +338,12 @@ void subscription_callback(const void * msgin)
 {
 	const std_msgs__msg__Float32 * amt_msg_sub = (const std_msgs__msg__Float32 *)msgin;
 	steering_angle = amt_msg_sub->data;
+}
+
+void subscription_callback_mode(const void * msgin)
+{
+	const std_msgs__msg__Int8 * amt_msg_sub_mode = (const std_msgs__msg__Int8 *)msgin;
+	steering_mode = amt_msg_sub_mode->data;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -338,9 +385,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	    error_pose = steering_angle - amt.rads;
 
-	    cmd_vx = PID_CONTROLLER_Compute(&pid_pos,error_pose);
-		cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx), 65535, -65535);
-		MDXX_set_range(&motor, 1000, cmd_ux * -1);
+	    if (uwTick > 1000)
+	    {
+	    	cmd_vx = PID_CONTROLLER_Compute(&pid_pos,error_pose);
+			cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx), 65535, -65535);
+			MDXX_set_range(&motor, 1000, cmd_ux * -1);
+	    }
+	    else
+	    {
+	    	cmd_ux = 0;
+	    }
 	  }
 }
 
