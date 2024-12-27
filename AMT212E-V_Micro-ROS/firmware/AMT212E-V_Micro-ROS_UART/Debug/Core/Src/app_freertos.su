@@ -1,9 +1,0 @@
-../Drivers/CMSIS/Include/core_cm4.h:1933:34:__NVIC_SystemReset	4	static,ignoring_inline_asm
-../Core/Src/app_freertos.c:151:6:MX_FREERTOS_Init	16	static
-../Core/Src/app_freertos.c:198:6:StartDefaultTask	464	static
-../Core/Src/app_freertos.c:302:6:timer_callback	40	static
-../Core/Src/app_freertos.c:331:6:amt_publish	32	static
-../Core/Src/app_freertos.c:339:6:subscription_callback	24	static
-../Core/Src/app_freertos.c:345:6:subscription_callback_mode	24	static
-../Core/Src/app_freertos.c:351:6:HAL_TIM_PeriodElapsedCallback	16	static
-../Core/Src/app_freertos.c:403:7:update_filter	24	static

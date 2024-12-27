@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete resource &apos;CARVER_Interface_Prototype_logic&apos;" deleteContents="false" description="Delete resource &apos;CARVER_Interface_Prototype_logic&apos;" element1="/CARVER_Interface_Prototype_logic" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1735244671437"/>
-</session>
