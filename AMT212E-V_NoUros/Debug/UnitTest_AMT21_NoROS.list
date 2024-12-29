@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000800c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00013b37  00000000  00000000  0000803c  2**0
+ 12 .debug_info   00013b5a  00000000  00000000  0000803c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000026db  00000000  00000000  0001bb73  2**0
+ 13 .debug_abbrev 000026db  00000000  00000000  0001bb96  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000010e8  00000000  00000000  0001e250  2**3
+ 14 .debug_aranges 000010f0  00000000  00000000  0001e278  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000d3a  00000000  00000000  0001f338  2**0
+ 15 .debug_rnglists 00000d40  00000000  00000000  0001f368  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0002659d  00000000  00000000  00020072  2**0
+ 16 .debug_macro  0002659d  00000000  00000000  000200a8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   000131d3  00000000  00000000  0004660f  2**0
+ 17 .debug_line   00013166  00000000  00000000  00046645  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000fbd4d  00000000  00000000  000597e2  2**0
+ 18 .debug_str    000fbd31  00000000  00000000  000597ab  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0015552f  2**0
+ 19 .comment      00000043  00000000  00000000  001554dc  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00004904  00000000  00000000  00155574  2**2
+ 20 .debug_frame  0000492c  00000000  00000000  00155520  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  00159e78  2**0
+ 21 .debug_line_str 0000008f  00000000  00000000  00159e4c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1058,210 +1058,211 @@ void AMT212EV_Init(AMT212EV *amt212ev ,UART_HandleTypeDef *huartx,uint16_t freq,
  8000d72:	68fb      	ldr	r3, [r7, #12]
  8000d74:	2200      	movs	r2, #0
  8000d76:	831a      	strh	r2, [r3, #24]
-	amt212ev->dir = -1;
+	amt212ev->dir = 1;
  8000d78:	68fb      	ldr	r3, [r7, #12]
- 8000d7a:	22ff      	movs	r2, #255	@ 0xff
+ 8000d7a:	2201      	movs	r2, #1
  8000d7c:	771a      	strb	r2, [r3, #28]
 	amt212ev->raw_count = 0;
  8000d7e:	68fb      	ldr	r3, [r7, #12]
  8000d80:	2200      	movs	r2, #0
  8000d82:	829a      	strh	r2, [r3, #20]
-	amt212ev->enc_home_pos = 2810;
+	amt212ev->enc_home_pos = 0;
  8000d84:	68fb      	ldr	r3, [r7, #12]
- 8000d86:	f640 22fa 	movw	r2, #2810	@ 0xafa
- 8000d8a:	835a      	strh	r2, [r3, #26]
+ 8000d86:	2200      	movs	r2, #0
+ 8000d88:	835a      	strh	r2, [r3, #26]
 	amt212ev->degree = 0;
- 8000d8c:	68fb      	ldr	r3, [r7, #12]
- 8000d8e:	f04f 0200 	mov.w	r2, #0
- 8000d92:	629a      	str	r2, [r3, #40]	@ 0x28
+ 8000d8a:	68fb      	ldr	r3, [r7, #12]
+ 8000d8c:	f04f 0200 	mov.w	r2, #0
+ 8000d90:	629a      	str	r2, [r3, #40]	@ 0x28
 	amt212ev->c[1] = 0;
- 8000d94:	68fb      	ldr	r3, [r7, #12]
- 8000d96:	2200      	movs	r2, #0
- 8000d98:	825a      	strh	r2, [r3, #18]
+ 8000d92:	68fb      	ldr	r3, [r7, #12]
+ 8000d94:	2200      	movs	r2, #0
+ 8000d96:	825a      	strh	r2, [r3, #18]
 	amt212ev->c[0] = 0;
- 8000d9a:	68fb      	ldr	r3, [r7, #12]
- 8000d9c:	2200      	movs	r2, #0
- 8000d9e:	821a      	strh	r2, [r3, #16]
+ 8000d98:	68fb      	ldr	r3, [r7, #12]
+ 8000d9a:	2200      	movs	r2, #0
+ 8000d9c:	821a      	strh	r2, [r3, #16]
 	amt212ev->diff_count = 0;
- 8000da0:	68fb      	ldr	r3, [r7, #12]
- 8000da2:	2200      	movs	r2, #0
- 8000da4:	621a      	str	r2, [r3, #32]
+ 8000d9e:	68fb      	ldr	r3, [r7, #12]
+ 8000da0:	2200      	movs	r2, #0
+ 8000da2:	621a      	str	r2, [r3, #32]
 	amt212ev->pulses = 0;
- 8000da6:	68fb      	ldr	r3, [r7, #12]
- 8000da8:	2200      	movs	r2, #0
- 8000daa:	625a      	str	r2, [r3, #36]	@ 0x24
+ 8000da4:	68fb      	ldr	r3, [r7, #12]
+ 8000da6:	2200      	movs	r2, #0
+ 8000da8:	625a      	str	r2, [r3, #36]	@ 0x24
 	amt212ev->revs = 0;
- 8000dac:	68fb      	ldr	r3, [r7, #12]
- 8000dae:	f04f 0200 	mov.w	r2, #0
- 8000db2:	62da      	str	r2, [r3, #44]	@ 0x2c
+ 8000daa:	68fb      	ldr	r3, [r7, #12]
+ 8000dac:	f04f 0200 	mov.w	r2, #0
+ 8000db0:	62da      	str	r2, [r3, #44]	@ 0x2c
 	amt212ev->rads = 0;
- 8000db4:	68fb      	ldr	r3, [r7, #12]
- 8000db6:	f04f 0200 	mov.w	r2, #0
- 8000dba:	631a      	str	r2, [r3, #48]	@ 0x30
+ 8000db2:	68fb      	ldr	r3, [r7, #12]
+ 8000db4:	f04f 0200 	mov.w	r2, #0
+ 8000db8:	631a      	str	r2, [r3, #48]	@ 0x30
 	amt212ev->pps = 0;
- 8000dbc:	68fb      	ldr	r3, [r7, #12]
- 8000dbe:	f04f 0200 	mov.w	r2, #0
- 8000dc2:	635a      	str	r2, [r3, #52]	@ 0x34
+ 8000dba:	68fb      	ldr	r3, [r7, #12]
+ 8000dbc:	f04f 0200 	mov.w	r2, #0
+ 8000dc0:	635a      	str	r2, [r3, #52]	@ 0x34
 	amt212ev->radps = 0;
- 8000dc4:	68fb      	ldr	r3, [r7, #12]
- 8000dc6:	f04f 0200 	mov.w	r2, #0
- 8000dca:	639a      	str	r2, [r3, #56]	@ 0x38
+ 8000dc2:	68fb      	ldr	r3, [r7, #12]
+ 8000dc4:	f04f 0200 	mov.w	r2, #0
+ 8000dc8:	639a      	str	r2, [r3, #56]	@ 0x38
 	amt212ev->rpm = 0;
- 8000dcc:	68fb      	ldr	r3, [r7, #12]
- 8000dce:	f04f 0200 	mov.w	r2, #0
- 8000dd2:	63da      	str	r2, [r3, #60]	@ 0x3c
+ 8000dca:	68fb      	ldr	r3, [r7, #12]
+ 8000dcc:	f04f 0200 	mov.w	r2, #0
+ 8000dd0:	63da      	str	r2, [r3, #60]	@ 0x3c
 	amt212ev->rx[0] = 0;
- 8000dd4:	68fb      	ldr	r3, [r7, #12]
- 8000dd6:	2200      	movs	r2, #0
- 8000dd8:	f883 2040 	strb.w	r2, [r3, #64]	@ 0x40
+ 8000dd2:	68fb      	ldr	r3, [r7, #12]
+ 8000dd4:	2200      	movs	r2, #0
+ 8000dd6:	f883 2040 	strb.w	r2, [r3, #64]	@ 0x40
 	amt212ev->rx[1] = 0;
- 8000ddc:	68fb      	ldr	r3, [r7, #12]
- 8000dde:	2200      	movs	r2, #0
- 8000de0:	f883 2041 	strb.w	r2, [r3, #65]	@ 0x41
+ 8000dda:	68fb      	ldr	r3, [r7, #12]
+ 8000ddc:	2200      	movs	r2, #0
+ 8000dde:	f883 2041 	strb.w	r2, [r3, #65]	@ 0x41
 	amt212ev->timeout = 0;
- 8000de4:	68fb      	ldr	r3, [r7, #12]
- 8000de6:	2200      	movs	r2, #0
- 8000de8:	60da      	str	r2, [r3, #12]
+ 8000de2:	68fb      	ldr	r3, [r7, #12]
+ 8000de4:	2200      	movs	r2, #0
+ 8000de6:	60da      	str	r2, [r3, #12]
 	amt212ev->error_caught = 0;
- 8000dea:	68fb      	ldr	r3, [r7, #12]
- 8000dec:	2200      	movs	r2, #0
- 8000dee:	f883 2042 	strb.w	r2, [r3, #66]	@ 0x42
+ 8000de8:	68fb      	ldr	r3, [r7, #12]
+ 8000dea:	2200      	movs	r2, #0
+ 8000dec:	f883 2042 	strb.w	r2, [r3, #66]	@ 0x42
 
 	// Start using UART DMA
 	HAL_UART_Receive_DMA(huartx, amt212ev->rx, sizeof(amt212ev->rx));
- 8000df2:	68fb      	ldr	r3, [r7, #12]
- 8000df4:	3340      	adds	r3, #64	@ 0x40
- 8000df6:	2202      	movs	r2, #2
- 8000df8:	4619      	mov	r1, r3
- 8000dfa:	68b8      	ldr	r0, [r7, #8]
- 8000dfc:	f003 ff84 	bl	8004d08 <HAL_UART_Receive_DMA>
+ 8000df0:	68fb      	ldr	r3, [r7, #12]
+ 8000df2:	3340      	adds	r3, #64	@ 0x40
+ 8000df4:	2202      	movs	r2, #2
+ 8000df6:	4619      	mov	r1, r3
+ 8000df8:	68b8      	ldr	r0, [r7, #8]
+ 8000dfa:	f003 ff85 	bl	8004d08 <HAL_UART_Receive_DMA>
 
 
 
 }
- 8000e00:	bf00      	nop
- 8000e02:	3710      	adds	r7, #16
- 8000e04:	46bd      	mov	sp, r7
- 8000e06:	bd80      	pop	{r7, pc}
+ 8000dfe:	bf00      	nop
+ 8000e00:	3710      	adds	r7, #16
+ 8000e02:	46bd      	mov	sp, r7
+ 8000e04:	bd80      	pop	{r7, pc}
 
-08000e08 <AMT212EV_ReadPosition>:
+08000e06 <AMT212EV_ReadPosition>:
 
-//void AMT212EV_Flip(AMT212EV *amt212ev){
-//	amt212ev->dir = -1;
-//}
+void AMT212EV_Flip(AMT212EV *amt212ev){
+	amt212ev->dir = -1;
+}
 
 void AMT212EV_ReadPosition(AMT212EV *amt212ev){
- 8000e08:	b580      	push	{r7, lr}
- 8000e0a:	b084      	sub	sp, #16
- 8000e0c:	af00      	add	r7, sp, #0
- 8000e0e:	6078      	str	r0, [r7, #4]
+ 8000e06:	b580      	push	{r7, lr}
+ 8000e08:	b084      	sub	sp, #16
+ 8000e0a:	af00      	add	r7, sp, #0
+ 8000e0c:	6078      	str	r0, [r7, #4]
 
 	// Arrays to command an encoder
 	uint8_t read_pos[1] = {0x54}; // Read Raw count data
- 8000e10:	2354      	movs	r3, #84	@ 0x54
- 8000e12:	733b      	strb	r3, [r7, #12]
+ 8000e0e:	2354      	movs	r3, #84	@ 0x54
+ 8000e10:	733b      	strb	r3, [r7, #12]
 
 		if (HAL_UART_Transmit_DMA(amt212ev->huartx, read_pos, sizeof(read_pos)) != HAL_OK)
- 8000e14:	687b      	ldr	r3, [r7, #4]
- 8000e16:	681b      	ldr	r3, [r3, #0]
- 8000e18:	f107 010c 	add.w	r1, r7, #12
- 8000e1c:	2201      	movs	r2, #1
- 8000e1e:	4618      	mov	r0, r3
- 8000e20:	f003 fef2 	bl	8004c08 <HAL_UART_Transmit_DMA>
- 8000e24:	4603      	mov	r3, r0
- 8000e26:	2b00      	cmp	r3, #0
- 8000e28:	d003      	beq.n	8000e32 <AMT212EV_ReadPosition+0x2a>
+ 8000e12:	687b      	ldr	r3, [r7, #4]
+ 8000e14:	681b      	ldr	r3, [r3, #0]
+ 8000e16:	f107 010c 	add.w	r1, r7, #12
+ 8000e1a:	2201      	movs	r2, #1
+ 8000e1c:	4618      	mov	r0, r3
+ 8000e1e:	f003 fef3 	bl	8004c08 <HAL_UART_Transmit_DMA>
+ 8000e22:	4603      	mov	r3, r0
+ 8000e24:	2b00      	cmp	r3, #0
+ 8000e26:	d003      	beq.n	8000e30 <AMT212EV_ReadPosition+0x2a>
 		{
 			// Handle transmission error if necessary
 			amt212ev->error_caught = READPOS;
- 8000e2a:	687b      	ldr	r3, [r7, #4]
- 8000e2c:	2200      	movs	r2, #0
- 8000e2e:	f883 2042 	strb.w	r2, [r3, #66]	@ 0x42
+ 8000e28:	687b      	ldr	r3, [r7, #4]
+ 8000e2a:	2200      	movs	r2, #0
+ 8000e2c:	f883 2042 	strb.w	r2, [r3, #66]	@ 0x42
 		}
 
 }
- 8000e32:	bf00      	nop
- 8000e34:	3710      	adds	r7, #16
- 8000e36:	46bd      	mov	sp, r7
- 8000e38:	bd80      	pop	{r7, pc}
+ 8000e30:	bf00      	nop
+ 8000e32:	3710      	adds	r7, #16
+ 8000e34:	46bd      	mov	sp, r7
+ 8000e36:	bd80      	pop	{r7, pc}
 
-08000e3a <AMT212EV_Processing_Data>:
+08000e38 <AMT212EV_Processing_Data>:
 
 	}
 }
 
 
 uint16_t AMT212EV_Processing_Data(AMT212EV *amt212ev){
- 8000e3a:	b580      	push	{r7, lr}
- 8000e3c:	b084      	sub	sp, #16
- 8000e3e:	af00      	add	r7, sp, #0
- 8000e40:	6078      	str	r0, [r7, #4]
+ 8000e38:	b580      	push	{r7, lr}
+ 8000e3a:	b084      	sub	sp, #16
+ 8000e3c:	af00      	add	r7, sp, #0
+ 8000e3e:	6078      	str	r0, [r7, #4]
 	 // Extract encoder data
 	    uint16_t data = (amt212ev->rx[1] << 8) | amt212ev->rx[0];
- 8000e42:	687b      	ldr	r3, [r7, #4]
- 8000e44:	f893 3041 	ldrb.w	r3, [r3, #65]	@ 0x41
- 8000e48:	021b      	lsls	r3, r3, #8
- 8000e4a:	b21a      	sxth	r2, r3
- 8000e4c:	687b      	ldr	r3, [r7, #4]
- 8000e4e:	f893 3040 	ldrb.w	r3, [r3, #64]	@ 0x40
- 8000e52:	b21b      	sxth	r3, r3
- 8000e54:	4313      	orrs	r3, r2
- 8000e56:	b21b      	sxth	r3, r3
- 8000e58:	81fb      	strh	r3, [r7, #14]
+ 8000e40:	687b      	ldr	r3, [r7, #4]
+ 8000e42:	f893 3041 	ldrb.w	r3, [r3, #65]	@ 0x41
+ 8000e46:	021b      	lsls	r3, r3, #8
+ 8000e48:	b21a      	sxth	r2, r3
+ 8000e4a:	687b      	ldr	r3, [r7, #4]
+ 8000e4c:	f893 3040 	ldrb.w	r3, [r3, #64]	@ 0x40
+ 8000e50:	b21b      	sxth	r3, r3
+ 8000e52:	4313      	orrs	r3, r2
+ 8000e54:	b21b      	sxth	r3, r3
+ 8000e56:	81fb      	strh	r3, [r7, #14]
 
 	    // Verify the checksum
 	    if (verifyChecksumRS485(data)) {
- 8000e5a:	89fb      	ldrh	r3, [r7, #14]
- 8000e5c:	4618      	mov	r0, r3
- 8000e5e:	f000 f991 	bl	8001184 <verifyChecksumRS485>
- 8000e62:	4603      	mov	r3, r0
- 8000e64:	2b00      	cmp	r3, #0
- 8000e66:	d019      	beq.n	8000e9c <AMT212EV_Processing_Data+0x62>
+ 8000e58:	89fb      	ldrh	r3, [r7, #14]
+ 8000e5a:	4618      	mov	r0, r3
+ 8000e5c:	f000 f992 	bl	8001184 <verifyChecksumRS485>
+ 8000e60:	4603      	mov	r3, r0
+ 8000e62:	2b00      	cmp	r3, #0
+ 8000e64:	d019      	beq.n	8000e9a <AMT212EV_Processing_Data+0x62>
 	    	if(amt212ev->cpr == 4096){
- 8000e68:	687b      	ldr	r3, [r7, #4]
- 8000e6a:	f9b3 3006 	ldrsh.w	r3, [r3, #6]
- 8000e6e:	f5b3 5f80 	cmp.w	r3, #4096	@ 0x1000
- 8000e72:	d105      	bne.n	8000e80 <AMT212EV_Processing_Data+0x46>
+ 8000e66:	687b      	ldr	r3, [r7, #4]
+ 8000e68:	f9b3 3006 	ldrsh.w	r3, [r3, #6]
+ 8000e6c:	f5b3 5f80 	cmp.w	r3, #4096	@ 0x1000
+ 8000e70:	d105      	bne.n	8000e7e <AMT212EV_Processing_Data+0x46>
 	    		 return data &= 0x0FFF;  // Mask to keep only 12 bits (valid data)
- 8000e74:	89fb      	ldrh	r3, [r7, #14]
- 8000e76:	f3c3 030b 	ubfx	r3, r3, #0, #12
- 8000e7a:	81fb      	strh	r3, [r7, #14]
- 8000e7c:	89fb      	ldrh	r3, [r7, #14]
- 8000e7e:	e012      	b.n	8000ea6 <AMT212EV_Processing_Data+0x6c>
+ 8000e72:	89fb      	ldrh	r3, [r7, #14]
+ 8000e74:	f3c3 030b 	ubfx	r3, r3, #0, #12
+ 8000e78:	81fb      	strh	r3, [r7, #14]
+ 8000e7a:	89fb      	ldrh	r3, [r7, #14]
+ 8000e7c:	e012      	b.n	8000ea4 <AMT212EV_Processing_Data+0x6c>
 
 	    	}
 
 	    	else if(amt212ev->cpr == 16384){
- 8000e80:	687b      	ldr	r3, [r7, #4]
- 8000e82:	f9b3 3006 	ldrsh.w	r3, [r3, #6]
- 8000e86:	f5b3 4f80 	cmp.w	r3, #16384	@ 0x4000
- 8000e8a:	d105      	bne.n	8000e98 <AMT212EV_Processing_Data+0x5e>
+ 8000e7e:	687b      	ldr	r3, [r7, #4]
+ 8000e80:	f9b3 3006 	ldrsh.w	r3, [r3, #6]
+ 8000e84:	f5b3 4f80 	cmp.w	r3, #16384	@ 0x4000
+ 8000e88:	d105      	bne.n	8000e96 <AMT212EV_Processing_Data+0x5e>
 	    		 return data &= 0x3FFF; // Mask to keep only 14 bits (valid data)
- 8000e8c:	89fb      	ldrh	r3, [r7, #14]
- 8000e8e:	f3c3 030d 	ubfx	r3, r3, #0, #14
- 8000e92:	81fb      	strh	r3, [r7, #14]
- 8000e94:	89fb      	ldrh	r3, [r7, #14]
- 8000e96:	e006      	b.n	8000ea6 <AMT212EV_Processing_Data+0x6c>
+ 8000e8a:	89fb      	ldrh	r3, [r7, #14]
+ 8000e8c:	f3c3 030d 	ubfx	r3, r3, #0, #14
+ 8000e90:	81fb      	strh	r3, [r7, #14]
+ 8000e92:	89fb      	ldrh	r3, [r7, #14]
+ 8000e94:	e006      	b.n	8000ea4 <AMT212EV_Processing_Data+0x6c>
 	    	}
 
 	        return data;
- 8000e98:	89fb      	ldrh	r3, [r7, #14]
- 8000e9a:	e004      	b.n	8000ea6 <AMT212EV_Processing_Data+0x6c>
+ 8000e96:	89fb      	ldrh	r3, [r7, #14]
+ 8000e98:	e004      	b.n	8000ea4 <AMT212EV_Processing_Data+0x6c>
 
 	    } else {
 	        // Handle checksum error by counting timeout
 	    	amt212ev->timeout += 1;
- 8000e9c:	687b      	ldr	r3, [r7, #4]
- 8000e9e:	68db      	ldr	r3, [r3, #12]
- 8000ea0:	1c5a      	adds	r2, r3, #1
- 8000ea2:	687b      	ldr	r3, [r7, #4]
- 8000ea4:	60da      	str	r2, [r3, #12]
+ 8000e9a:	687b      	ldr	r3, [r7, #4]
+ 8000e9c:	68db      	ldr	r3, [r3, #12]
+ 8000e9e:	1c5a      	adds	r2, r3, #1
+ 8000ea0:	687b      	ldr	r3, [r7, #4]
+ 8000ea2:	60da      	str	r2, [r3, #12]
 	    }
 }
- 8000ea6:	4618      	mov	r0, r3
- 8000ea8:	3710      	adds	r7, #16
- 8000eaa:	46bd      	mov	sp, r7
- 8000eac:	bd80      	pop	{r7, pc}
+ 8000ea4:	4618      	mov	r0, r3
+ 8000ea6:	3710      	adds	r7, #16
+ 8000ea8:	46bd      	mov	sp, r7
+ 8000eaa:	bd80      	pop	{r7, pc}
+ 8000eac:	0000      	movs	r0, r0
 	...
 
 08000eb0 <AMT212EV_DiffCount>:
@@ -1275,7 +1276,7 @@ void AMT212EV_DiffCount(AMT212EV *amt212ev){
 
 	amt212ev->raw_count = AMT212EV_Processing_Data(amt212ev);
  8000eba:	6878      	ldr	r0, [r7, #4]
- 8000ebc:	f7ff ffbd 	bl	8000e3a <AMT212EV_Processing_Data>
+ 8000ebc:	f7ff ffbc 	bl	8000e38 <AMT212EV_Processing_Data>
  8000ec0:	4603      	mov	r3, r0
  8000ec2:	b21a      	sxth	r2, r3
  8000ec4:	687b      	ldr	r3, [r7, #4]
@@ -1502,7 +1503,7 @@ void AMT212EV_Compute(AMT212EV *amt212ev){
  80010b8:	ee67 7a27 	vmul.f32	s15, s14, s15
  80010bc:	687b      	ldr	r3, [r7, #4]
  80010be:	edc3 7a0d 	vstr	s15, [r3, #52]	@ 0x34
-	amt212ev->radps = amt212ev->pps * 2 * M_PI / (float)amt212ev->cpr;; // Radian per second
+	amt212ev->radps = amt212ev->pps * 2 * M_PI / (float)amt212ev->cpr; // Radian per second
  80010c2:	687b      	ldr	r3, [r7, #4]
  80010c4:	edd3 7a0d 	vldr	s15, [r3, #52]	@ 0x34
  80010c8:	ee77 7aa7 	vadd.f32	s15, s15, s15
@@ -2405,7 +2406,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
  8001632:	607b      	str	r3, [r7, #4]
 		AMT212EV_ReadPosition(&amt);
  8001634:	4807      	ldr	r0, [pc, #28]	@ (8001654 <HAL_TIM_PeriodElapsedCallback+0x2c>)
- 8001636:	f7ff fbe7 	bl	8000e08 <AMT212EV_ReadPosition>
+ 8001636:	f7ff fbe6 	bl	8000e06 <AMT212EV_ReadPosition>
 		AMT212EV_DiffCount(&amt);
  800163a:	4806      	ldr	r0, [pc, #24]	@ (8001654 <HAL_TIM_PeriodElapsedCallback+0x2c>)
  800163c:	f7ff fc38 	bl	8000eb0 <AMT212EV_DiffCount>
@@ -3268,49 +3269,110 @@ void SystemInit(void)
  8001a34:	e000ed00 	.word	0xe000ed00
 
 08001a38 <Reset_Handler>:
+
+    .section	.text.Reset_Handler
+	.weak	Reset_Handler
+	.type	Reset_Handler, %function
+Reset_Handler:
+  ldr   r0, =_estack
  8001a38:	480d      	ldr	r0, [pc, #52]	@ (8001a70 <LoopForever+0x2>)
+  mov   sp, r0          /* set stack pointer */
  8001a3a:	4685      	mov	sp, r0
+
+/* Call the clock system initialization function.*/
+    bl  SystemInit
  8001a3c:	f7ff ffea 	bl	8001a14 <SystemInit>
+
+/* Copy the data segment initializers from flash to SRAM */
+  ldr r0, =_sdata
  8001a40:	480c      	ldr	r0, [pc, #48]	@ (8001a74 <LoopForever+0x6>)
+  ldr r1, =_edata
  8001a42:	490d      	ldr	r1, [pc, #52]	@ (8001a78 <LoopForever+0xa>)
+  ldr r2, =_sidata
  8001a44:	4a0d      	ldr	r2, [pc, #52]	@ (8001a7c <LoopForever+0xe>)
+  movs r3, #0
  8001a46:	2300      	movs	r3, #0
+  b	LoopCopyDataInit
  8001a48:	e002      	b.n	8001a50 <LoopCopyDataInit>
 
 08001a4a <CopyDataInit>:
+
+CopyDataInit:
+  ldr r4, [r2, r3]
  8001a4a:	58d4      	ldr	r4, [r2, r3]
+  str r4, [r0, r3]
  8001a4c:	50c4      	str	r4, [r0, r3]
+  adds r3, r3, #4
  8001a4e:	3304      	adds	r3, #4
 
 08001a50 <LoopCopyDataInit>:
+
+LoopCopyDataInit:
+  adds r4, r0, r3
  8001a50:	18c4      	adds	r4, r0, r3
+  cmp r4, r1
  8001a52:	428c      	cmp	r4, r1
+  bcc CopyDataInit
  8001a54:	d3f9      	bcc.n	8001a4a <CopyDataInit>
+  
+/* Zero fill the bss segment. */
+  ldr r2, =_sbss
  8001a56:	4a0a      	ldr	r2, [pc, #40]	@ (8001a80 <LoopForever+0x12>)
+  ldr r4, =_ebss
  8001a58:	4c0a      	ldr	r4, [pc, #40]	@ (8001a84 <LoopForever+0x16>)
+  movs r3, #0
  8001a5a:	2300      	movs	r3, #0
+  b LoopFillZerobss
  8001a5c:	e001      	b.n	8001a62 <LoopFillZerobss>
 
 08001a5e <FillZerobss>:
+
+FillZerobss:
+  str  r3, [r2]
  8001a5e:	6013      	str	r3, [r2, #0]
+  adds r2, r2, #4
  8001a60:	3204      	adds	r2, #4
 
 08001a62 <LoopFillZerobss>:
+
+LoopFillZerobss:
+  cmp r2, r4
  8001a62:	42a2      	cmp	r2, r4
+  bcc FillZerobss
  8001a64:	d3fb      	bcc.n	8001a5e <FillZerobss>
+
+/* Call static constructors */
+    bl __libc_init_array
  8001a66:	f004 fe3d 	bl	80066e4 <__libc_init_array>
+/* Call the application's entry point.*/
+	bl	main
  8001a6a:	f7ff fbb7 	bl	80011dc <main>
 
 08001a6e <LoopForever>:
+
+LoopForever:
+    b LoopForever
  8001a6e:	e7fe      	b.n	8001a6e <LoopForever>
+  ldr   r0, =_estack
  8001a70:	20020000 	.word	0x20020000
+  ldr r0, =_sdata
  8001a74:	20000000 	.word	0x20000000
+  ldr r1, =_edata
  8001a78:	2000000c 	.word	0x2000000c
+  ldr r2, =_sidata
  8001a7c:	08006794 	.word	0x08006794
+  ldr r2, =_sbss
  8001a80:	2000000c 	.word	0x2000000c
+  ldr r4, =_ebss
  8001a84:	2000025c 	.word	0x2000025c
 
 08001a88 <ADC1_2_IRQHandler>:
+ * @retval : None
+*/
+    .section	.text.Default_Handler,"ax",%progbits
+Default_Handler:
+Infinite_Loop:
+	b	Infinite_Loop
  8001a88:	e7fe      	b.n	8001a88 <ADC1_2_IRQHandler>
 
 08001a8a <HAL_Init>:

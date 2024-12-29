@@ -88,6 +88,7 @@ float cmd_ux;
 float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
+
 int8_t steering_mode = 0.0;
 
 int16_t sync_counter = 1000;
@@ -102,8 +103,6 @@ amt212ev_interfaces__msg__AmtRead amt_msg_sub;
 
 rcl_subscription_t amt_subscription_mode;
 amt212ev_interfaces__msg__AmtRead amt_msg_sub_mode;
-
-uint64_t cc = 0;
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -311,7 +310,6 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 
             if (rmw_uros_ping_agent(100, 1) == RMW_RET_OK) {
                 rmw_uros_sync_session(1000); // Sync if agent is reachable
-            	cc++;
             }
             else {
                 // If the agent is not reachable, let the watchdog reset the MCU
@@ -390,7 +388,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    if (uwTick > 1000)
 	    {
 	    	cmd_vx = PID_CONTROLLER_Compute(&pid_pos,error_pose);
-			cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx), 65535, -65535);
+	    	cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx), 65535, -65535);
 			MDXX_set_range(&motor, 1000, cmd_ux * -1);
 	    }
 	    else
