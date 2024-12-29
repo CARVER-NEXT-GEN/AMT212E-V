@@ -43,6 +43,7 @@
 #include "PWM.h"
 #include "Controller.h"
 #include "Cytron_MDXX.h"
+#include "math.h"
 
 #include <amt212ev_interfaces/msg/amt_read.h>
 #include <std_msgs/msg/float32.h>
@@ -72,22 +73,33 @@ MDXX motor;
 PID_CONTROLLER pid_pos;
 PID_CONTROLLER pid_vel;
 
-float kp_pos = 4.0;
-float ki_pos = 0.004;
-float kd_pos= 0.0;
-float u_max_pos = 65535.0;
+int32_t t =0;
+float theta=0;
+#define SAMPLE_RATE 1000 // Define the sample rate in Hz
+#define FREQUENCY 0.5f   // Define the sine wave frequency in Hz
 
-float kp_vel = 11500.0;
-float ki_vel = 0.02;
+
+
+float kp_pos = 6.0;
+float ki_pos = 0.0;
+float kd_pos= 0.0;
+float u_max_pos = 6.0;
+
+float kp_vel = 7200;
+float ki_vel = 220.0;
 float kd_vel= 0.0;
 float u_max_vel = 65535.0;
 
-float cmd_vx;
-float cmd_ux;
+float cmd_vx = 0;
+float cmd_ux = 0;
+float setpoint = 0;
 
 float error_pose = 0.0;
 float filtered_value = 0.0;
 float steering_angle = 0.0;
+
+float vel_filt = 0.0;
+float pos_filt = 0.0;
 
 int8_t steering_mode = 0.0;
 
@@ -153,7 +165,7 @@ void MX_FREERTOS_Init(void) {
 	PID_CONTROLLER_Init(&pid_pos, kp_pos, ki_pos, kd_pos, u_max_pos);
 	PID_CONTROLLER_Init(&pid_vel, kp_vel, ki_vel, kd_vel, u_max_vel);
 	MDXX_init(&motor, &htim8, TIM_CHANNEL_3, &htim8, TIM_CHANNEL_1);
-	MDXX_set_range(&motor, 1000, 0);
+	MDXX_set_range(&motor, 2000, 0);
 	HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END Init */
 
@@ -364,7 +376,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    AMT212EV_DiffCount(&amt);
 	    AMT212EV_Compute(&amt);
 
-	    amt.radps = update_filter(amt.radps);
+	    vel_filt = -update_filter(amt.radps);
+	    pos_filt = -amt.rads;
 
 	    if (steering_angle >= (0.61))
 	    	{
@@ -374,27 +387,53 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    	{
 	    	steering_angle = -0.6;
 	    	}
-	    if (amt.rads >= (0.7))
+	    if (pos_filt >= (0.7))
 			{
 			steering_angle = 0.6;
 			}
-		if (amt.rads <= (-0.7))
+		if (pos_filt <= (-0.7))
 			{
 			steering_angle = -0.6;
 			}
 
-	    error_pose = steering_angle - amt.rads;
 
 	    if (uwTick > 1000)
 	    {
+//			static int toggle_flag = 0; // Keeps track of PWM toggle state
+//
+//			if (t >= 3000) {
+//				// Toggle PWM between 45 and -45
+//				if (toggle_flag == 0) {
+//					setpoint = 0.5;
+//					toggle_flag = 1;
+//				} else {
+//					setpoint = -0.5;
+//					toggle_flag = 0;
+//				}
+//				t = 0; // Reset timer
+//			}
+//			static float phase = 0.0f; // Phase accumulator for the sine wave
+//			theta = sinf(phase) * 0.5; // Scale sine wave amplitude to +/- 45
+//			phase += (2 * M_PI * FREQUENCY) / SAMPLE_RATE; // Increment phase based on sample rate
+//			if (phase >= 2 * M_PI) {
+//				phase -= 2 * M_PI; // Wrap phase within [0, 2*PI]
+//			}
+
+			error_pose = steering_angle - pos_filt;
+
 	    	cmd_vx = PID_CONTROLLER_Compute(&pid_pos,error_pose);
-	    	cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx), 65535, -65535);
-			MDXX_set_range(&motor, 1000, cmd_ux * -1);
+	    	cmd_ux = PWM_Satuation(PID_CONTROLLER_Compute(&pid_vel, cmd_vx -vel_filt), 65535, -65535);
+//			MDXX_set_range(&motor, 2000, cmd_ux);
 	    }
 	    else
 	    {
 	    	cmd_ux = 0;
 	    }
+
+	    MDXX_set_range(&motor, 2000,cmd_ux);
+
+//	    t+=1;
+
 	  }
 }
 
